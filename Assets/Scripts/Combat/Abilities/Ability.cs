@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using UnityEngine;
 
 namespace Prototype
 {
@@ -19,12 +20,8 @@ namespace Prototype
     }
 
     [Serializable]
-    public class AbilityData
+    public class AbilityEffectData
     {
-        public string name;
-        public AbilityEffectType effectType;
-        public AbilityType abilityType;
-        public int power;
         public float healthFactor;
         public float confidenceFactor;
         public float stubbornessFactor;
@@ -32,7 +29,7 @@ namespace Prototype
 
     public abstract class Ability
     {
-        protected AbilityData data;
+        protected AbilityEffectData data;
 
         protected abstract void WillExecute();
 
@@ -61,7 +58,7 @@ namespace Prototype
         }
     }
 
-    public abstract class SingleTargetAbility : Ability
+    public class SingleTargetAbility : Ability
     {
         Character target;
         protected override void WillExecute()
@@ -80,13 +77,19 @@ namespace Prototype
 
         protected override void OnExecute()
         {
-            Debug.Assert(target != null);
+            System.Diagnostics.Debug.Assert(target != null);
 
             CharacterData data = target.GetCharacterData();
 
-            Debug.Assert(data != null);
+            System.Diagnostics.Debug.Assert(data != null);
 
+            
 
+        }
+
+        protected override void AfterExecute()
+        {
+            UnityEngine.Debug.Log("Ability Executed");
         }
     }
 

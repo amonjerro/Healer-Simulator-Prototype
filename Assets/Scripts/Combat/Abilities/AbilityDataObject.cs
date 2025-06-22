@@ -6,6 +6,13 @@ namespace Prototype
     class AbilityDataObject : ScriptableObject
     {
         public Sprite icon;
-        public AbilityData data;
+        public string abilityName;
+        public int power;
+        public AbilityEffectType effectType;
+        public AbilityType abilityType;
+        public bool appliesStatus;
+        
+        public StatusEffectData statusEffectData;
+        public AbilityEffectData effectData;
     }
 }
