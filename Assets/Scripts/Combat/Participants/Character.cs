@@ -1,9 +1,13 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 namespace Prototype
 {
     public class Character : MonoBehaviour
     {
+        [SerializeField]
+        CharacterDataAsset _characterDataAsset;
+
         CharacterData data;
         List<StatusEffect> activeStatusEffects;
 
@@ -11,7 +15,10 @@ namespace Prototype
         void Start()
         {
             data = new CharacterData();
+            data.maxHealth = _characterDataAsset.MaxHealth;
             activeStatusEffects = new List<StatusEffect>();
+            CharacterMovement movementRef = GetComponentInChildren<CharacterMovement>();
+            movementRef.SetMovementVelocity(_characterDataAsset.MoveSpeed);
         }
 
         // Update is called once per frame
@@ -42,6 +49,11 @@ namespace Prototype
         {
             StatusEffect effect = new StatusEffect(dataConfig);
             activeStatusEffects.Add(effect);
+        }
+
+        public void SetCharacterAsset(CharacterDataAsset asset)
+        {
+            _characterDataAsset = asset;
         }
     }
 }
