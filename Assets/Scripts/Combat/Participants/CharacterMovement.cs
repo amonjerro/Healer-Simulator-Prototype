@@ -1,8 +1,11 @@
-using System;
 using UnityEngine;
 
 namespace Prototype
 {
+    /// <summary>
+    /// Class that handles all movement for a particular character.
+    /// Governs PCs and NPCs.
+    /// </summary>
     public class CharacterMovement : MonoBehaviour
     {
         float directionX;
@@ -24,11 +27,13 @@ namespace Prototype
                 parentObject.transform.position.z);
         }
 
-        public void SetMoveVector(Vector2 moveVector)
+        /// <summary>
+        /// Sets the movement direction
+        /// </summary>
+        /// <param name="direction"></param>
+        public void SetMoveDirection(float direction)
         {
-            directionX = moveVector.x;
-            CharacterEvent ev = new CharacterEvent(CharacterEventTypes.Movement, directionX);
-            CharacterEventManager.BroadcastCharacterEvent(ev);
+            directionX = direction;
         }
 
         public void SetMovementVelocity(float velocity) { 

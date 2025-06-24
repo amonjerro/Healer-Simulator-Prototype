@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Prototype
 {
+
+    /// <summary>
+    /// Singleton manager class that controls the general flow of combat.
+    /// </summary>
     public class CombatManager : MonoBehaviour
     {
         public static Action<SingleTargetAbility> TargetingAbilitySelected;
