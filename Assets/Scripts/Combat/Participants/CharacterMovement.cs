@@ -15,16 +15,26 @@ namespace Prototype
         private void Start()
         {
             parentObject = transform.parent;
+            CharacterEventManager.onCharacterEvent += HandleCharacterEvent;
         }
 
         private void Update()
         {
             float xAdjust = directionX * moveVelocity * TimeUtil.GetDelta();
-
             parentObject.transform.position = new Vector3(
                 parentObject.transform.position.x + xAdjust, 
                 parentObject.transform.position.y, 
                 parentObject.transform.position.z);
+        }
+
+        private void HandleCharacterEvent(CharacterEvent ev)
+        {
+            if (ev.eventType != CharacterEventTypes.Movement)
+            {
+                return;
+            }
+
+            SetMoveDirection(ev.eventValue);
         }
 
         /// <summary>

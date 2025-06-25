@@ -1,4 +1,5 @@
 using UnityEngine;
+using Prototype.StateMachine;
 
 namespace Prototype
 {
@@ -9,14 +10,26 @@ namespace Prototype
     /// </summary>
     public class AIController : MonoBehaviour
     {
-        AIStrategy strategy;
+
+        [SerializeField]
+        ActorAttitude CharacterAttitude;
+
+        StateMachine<CharacterStates> stateMachine;
         CharacterMovement characterMovement;
         
 
         private void Start()
         {
             characterMovement = GetComponentInParent<CharacterMovement>();
-            
+            Character character = GetComponentInParent<Character>();
+            ServiceLocator.Instance.GetService<AIDirectorService>().RegisterActor(CharacterAttitude, character);
+            stateMachine = new StateMachine<CharacterStates>();
         }
+
+        private void SetUpStateMachine()
+        {
+
+        }
+
     }
 }

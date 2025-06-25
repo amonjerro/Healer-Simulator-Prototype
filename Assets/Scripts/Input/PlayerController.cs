@@ -13,6 +13,9 @@ namespace Prototype
         private void Start()
         {
             eventManager = GetComponent<CharacterEventManager>();
+
+            Character character = GetComponentInParent<Character>();
+            ServiceLocator.Instance.GetService<AIDirectorService>().RegisterActor(ActorAttitude.Player, character);
         }
 
         /// <summary>
