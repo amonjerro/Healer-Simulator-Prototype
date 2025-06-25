@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3202844313472475515}
   - component: {fileID: 3717061043502805067}
   - component: {fileID: 7482391841193766156}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AI Companion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8500591864496664696}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: VoiceLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5820791048383497486}
   - component: {fileID: 7744690117809043981}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MovementController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 2801036956104610832}
   - component: {fileID: 3801446483146420412}
   - component: {fileID: 2330685420449982917}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Visualization
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,6 +389,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AI Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 8937519401420434321, guid: 142fbc88fcc68f24db96fb132b3f96bd, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -415,6 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterAttitude: 1
+  activeState: 0
 --- !u!4 &3896953562589500910 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5662971151847104144, guid: 142fbc88fcc68f24db96fb132b3f96bd, type: 3}

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: TestCompanion
   m_EditorClassIdentifier: 
   MaxHealth: 150
+  MaxMana: 1
   MoveSpeed: 3
   Personality: 2

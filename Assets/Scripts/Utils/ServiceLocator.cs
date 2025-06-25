@@ -6,6 +6,7 @@ namespace Prototype
 {
     public class ServiceLocator : MonoBehaviour
     {
+        public static Action<ServiceMessage> serviceAction;
         public static ServiceLocator Instance;
         Dictionary<Type, MonoBehaviour> serviceDict;
 

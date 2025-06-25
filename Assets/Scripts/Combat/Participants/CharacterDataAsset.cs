@@ -9,6 +9,7 @@ namespace Prototype
     public class CharacterDataAsset : ScriptableObject
     {
         public int MaxHealth;
+        public int MaxMana;
         public float MoveSpeed;
         public Personality Personality;
     }

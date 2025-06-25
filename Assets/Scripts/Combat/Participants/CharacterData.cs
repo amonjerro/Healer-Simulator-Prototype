@@ -15,6 +15,8 @@ namespace Prototype
     public class CharacterData
     {
         public int maxHealth;
+        public int maxMana;
+        private int _currentMana;
         private int _currentHealth;
         private int _currentStubborness;
         private int _currentConfidence;
@@ -41,6 +43,10 @@ namespace Prototype
                 _currentHealth = value;
             }
         }
+        public float GetFloatHealth()
+        {
+            return CurrentHealth / (float)maxHealth;
+        }
 
         public int CurrentConfidence
         {
@@ -65,6 +71,10 @@ namespace Prototype
             }
         }
 
+        
+
+        
+
 
         public int CurrentStubborness
         {
@@ -86,10 +96,47 @@ namespace Prototype
             }
         }
 
+        public float GetFloatStubborn()
+        {
+            return CurrentStubborness / (float)CombatConstants.MaxStubborness;
+        }
+
+
+        public int CurrentMana
+        {
+            get { return _currentMana; }
+            set
+            {
+                if (value < 0)
+                {
+                    _currentMana = 0;
+                    return;
+                }
+
+                if (value > maxMana)
+                {
+                    _currentMana = maxMana;
+                    return;
+                }
+
+                _currentMana = value;
+            }
+        }
+
+        public float GetFloatMana()
+        {
+            return CurrentMana / (float)maxMana;
+        }
 
         public float stubbornessBurnRate;
         public float confidenceMapFactor;
 
+
+        public void Reset()
+        {
+            _currentHealth = maxHealth;
+            _currentMana = maxMana;
+        }
     }
 }
 

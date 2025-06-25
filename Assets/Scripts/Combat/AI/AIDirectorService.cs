@@ -24,14 +24,21 @@ namespace Prototype
             {
                 case ActorAttitude.Friendly:
                     friendlyAIs.Add(controller);
+                    EmitActorRegistered(controller);
                     return;
                 case ActorAttitude.Player:
                     playerCharacter = controller;
+                    EmitActorRegistered(playerCharacter);
                     return;
                 default:
                     hostileAIs.Add(controller);
                     return;
             }
+        }
+
+        private void EmitActorRegistered(Character controller) {
+            ServiceMessage<Character> serviceMessage = new ServiceMessage<Character>(controller, ServiceMessageTypes.ActorRegistered);
+            ServiceLocator.serviceAction?.Invoke(serviceMessage);
         }
 
         public float GetPlayerPosition()
@@ -43,5 +50,6 @@ namespace Prototype
         {
             return maxX;
         }
+
     }
 }

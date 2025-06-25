@@ -20,7 +20,7 @@ namespace Prototype
         SpriteRenderer spriteRenderer;
         Animator animator;
 
-        private void Start()
+        private void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
@@ -59,6 +59,12 @@ namespace Prototype
                 spriteRenderer.flipX = startsFlipped;
             }
         }
+
+        public Sprite GetSprite()
+        {
+            return spriteRenderer.sprite;
+        }
+
 
     }
 }

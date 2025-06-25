@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7907184095423021725}
   - component: {fileID: 2478517345888392373}
   - component: {fileID: 4714115919740833769}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visualization
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 2953385241201850547}
   - component: {fileID: 1617256319969006083}
   - component: {fileID: 2497758727299234325}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3183267483632450370}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: VoiceLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 2071095153613107829}
   - component: {fileID: 2598291631205361750}
   - component: {fileID: 585345175692569850}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MovementController
   m_TagString: Untagged
   m_Icon: {fileID: 0}

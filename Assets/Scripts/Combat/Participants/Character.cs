@@ -1,4 +1,6 @@
+using Prototype.UI;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 namespace Prototype
 {
@@ -14,11 +16,15 @@ namespace Prototype
         CharacterData data;
         List<StatusEffect> activeStatusEffects;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        MemberStats statsUI;
+
+
+        void Awake()
         {
             data = new CharacterData();
             data.maxHealth = _characterDataAsset.MaxHealth;
+            data.maxMana = _characterDataAsset.MaxMana;
+            data.Reset();
             activeStatusEffects = new List<StatusEffect>();
             CharacterMovement movementRef = GetComponentInChildren<CharacterMovement>();
             movementRef.SetMovementVelocity(_characterDataAsset.MoveSpeed);
@@ -74,6 +80,37 @@ namespace Prototype
         public void SetCharacterAsset(CharacterDataAsset asset)
         {
             _characterDataAsset = asset;
+        }
+
+        /// <summary>
+        /// Set the reference for this character UI and configure it
+        /// </summary>
+        /// <param name="statsElement"></param>
+        public void SetStatsUI(MemberStats statsElement)
+        {
+            statsUI = statsElement;
+            UpdateUI();
+            SetPortraitUI();
+        }
+
+        /// <summary>
+        /// Updates the stat values of the UI to provide players with feedback
+        /// </summary>
+        private void UpdateUI()
+        {
+            statsUI.SetHealthValue(data.GetFloatHealth());
+            statsUI.SetManaValue(data.GetFloatMana());
+            statsUI.SetStubbornessValue(data.GetFloatStubborn());
+        }
+
+
+        /// <summary>
+        /// Sets this character's portrait in the UI
+        /// </summary>
+        private void SetPortraitUI()
+        {
+            CharacterView characterView = GetComponentInChildren<CharacterView>();
+            statsUI.SetPortrait(characterView.GetSprite());
         }
     }
 }
