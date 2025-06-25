@@ -107,6 +107,22 @@ namespace Prototype.StateMachine
         }
     }
 
+    public class LessThanCondition<T> : AbsValueCondition<T> where T : IComparable
+    {
+        T Threshold;
+
+        public LessThanCondition(T threshold)
+        {
+            Threshold = threshold;
+            conditionType = ConditionType.Greater;
+        }
+
+        public override bool Test()
+        {
+            return ConditionValue.CompareTo(Threshold) <= 0;
+        }
+    }
+
 
     /// <summary>
     /// Checks to see if a value is equal to some specified value

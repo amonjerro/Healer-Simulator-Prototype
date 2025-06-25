@@ -1,21 +1,37 @@
 using Prototype;
 namespace Prototype.StateMachine
 {
-    public class IdleState : AbsState<CharacterStates>
+    public class IdleState : AICharacterState
     {
+        float timeToIdle = 2.0f;
+        float timer;
+        GreaterThanCondition<float> condition;
+        public IdleState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c) { 
+            condition = new GreaterThanCondition<float>(timeToIdle);
+            
+            Transition<CharacterStates> transition = new Transition<CharacterStates>();
+            transition.SetCondition(condition);
+
+            transitions.Add(CharacterStates.Idle, transition);
+            
+        }
+
         protected override void OnEnter()
         {
-            throw new System.NotImplementedException();
+            timer = 0f;
         }
 
         protected override void OnExit()
         {
-            throw new System.NotImplementedException();
+            Flush();
         }
 
         protected override void OnUpdate()
         {
-            throw new System.NotImplementedException();
+            // Do nothing for a sec
+            timer += TimeUtil.GetDelta();
+
+            condition.SetValue(timer);
         }
     }
 }

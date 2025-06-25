@@ -4,19 +4,27 @@ namespace Prototype.StateMachine
 {
     public class SeekingState : AbsState<CharacterStates>
     {
+
+        Character target;
+
         protected override void OnEnter()
         {
-            throw new System.NotImplementedException();
+            // Set my target
         }
 
         protected override void OnExit()
         {
-            throw new System.NotImplementedException();
+            // Attack if in range
+
         }
 
         protected override void OnUpdate()
         {
-            throw new System.NotImplementedException();
+            // Update destination if necessary
+
+            // Move towards destination
+
+            // Check conditions
         }
     }
 }

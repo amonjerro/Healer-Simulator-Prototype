@@ -12,9 +12,9 @@ namespace Prototype
 
         private void Start()
         {
-            eventManager = GetComponent<CharacterEventManager>();
-
+            
             Character character = GetComponentInParent<Character>();
+            eventManager = character.GetComponentInParent<CharacterEventManager>();
             ServiceLocator.Instance.GetService<AIDirectorService>().RegisterActor(ActorAttitude.Player, character);
         }
 
@@ -26,7 +26,7 @@ namespace Prototype
         {
             Vector2 moveValue = val.Get<Vector2>();
             CharacterEvent ev = new CharacterEvent(CharacterEventTypes.Movement, moveValue.x);
-            CharacterEventManager.BroadcastCharacterEvent(ev);
+            eventManager.BroadcastCharacterEvent(ev);
         }
 
         /// <summary>

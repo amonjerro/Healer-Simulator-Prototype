@@ -6,17 +6,23 @@ namespace Prototype.StateMachine
     {
         protected override void OnEnter()
         {
-            throw new System.NotImplementedException();
+            // Perform the attack action
+
+            // Begin a cooldown timer
         }
 
         protected override void OnExit()
         {
-            throw new System.NotImplementedException();
+            // Flee if low on health
+
+            // Insist if you're in range
+
+            // Seek if you're not
         }
 
         protected override void OnUpdate()
         {
-            throw new System.NotImplementedException();
+            // Check to see if the cooldown timer is over
         }
     }
 

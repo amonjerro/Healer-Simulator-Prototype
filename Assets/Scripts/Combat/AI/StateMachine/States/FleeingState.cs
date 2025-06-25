@@ -6,17 +6,17 @@ namespace Prototype.StateMachine
     {
         protected override void OnEnter()
         {
-            throw new System.NotImplementedException();
+            // Get a reference to the player
         }
 
         protected override void OnExit()
         {
-            throw new System.NotImplementedException();
+            // Seek an enemy
         }
 
         protected override void OnUpdate()
         {
-            throw new System.NotImplementedException();
+            // Try to move left of the player
         }
     }
 }

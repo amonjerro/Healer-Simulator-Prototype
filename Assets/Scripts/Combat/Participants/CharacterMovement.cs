@@ -15,7 +15,7 @@ namespace Prototype
         private void Start()
         {
             parentObject = transform.parent;
-            CharacterEventManager.onCharacterEvent += HandleCharacterEvent;
+            parentObject.GetComponent<CharacterEventManager>().onCharacterEvent += HandleCharacterEvent;
         }
 
         private void Update()

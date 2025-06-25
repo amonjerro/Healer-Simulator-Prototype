@@ -25,12 +25,4 @@ namespace Prototype
         }
     }
 
-    public class CharacterEventManager : MonoBehaviour
-    {
-        public static Action<CharacterEvent> onCharacterEvent;
-
-        public static void BroadcastCharacterEvent(CharacterEvent characterEvent) { 
-            onCharacterEvent?.Invoke(characterEvent);
-        }
-    }
 }

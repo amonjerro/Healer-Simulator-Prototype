@@ -9,6 +9,7 @@ namespace Prototype.StateMachine
     public enum CharacterStates
     {
         Idle,
+        Wandering,
         Seeking,
         Attacking,
         Fleeing

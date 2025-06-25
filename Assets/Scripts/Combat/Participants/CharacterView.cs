@@ -24,7 +24,7 @@ namespace Prototype
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
-            CharacterEventManager.onCharacterEvent += ProcessEvent;
+            GetComponentInParent<CharacterEventManager>().onCharacterEvent += ProcessEvent;
         }
         
         /// <summary>

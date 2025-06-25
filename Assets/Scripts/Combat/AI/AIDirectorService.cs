@@ -9,6 +9,9 @@ namespace Prototype
         List<Character> friendlyAIs;
         Character playerCharacter;
 
+        [SerializeField]
+        float maxX;
+
         private void Awake()
         {
             hostileAIs = new List<Character>();
@@ -29,6 +32,16 @@ namespace Prototype
                     hostileAIs.Add(controller);
                     return;
             }
+        }
+
+        public float GetPlayerPosition()
+        {
+            return playerCharacter.gameObject.transform.position.x;
+        }
+
+        public float GetBounds()
+        {
+            return maxX;
         }
     }
 }
