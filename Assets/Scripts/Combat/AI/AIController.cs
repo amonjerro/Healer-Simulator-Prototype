@@ -19,6 +19,10 @@ namespace Prototype
 
         AIDirectorService directorRef;
 
+        [SerializeField]
+        CharacterStates activeState;
+
+
         private void Start()
         {
             eventManager = GetComponentInParent<CharacterEventManager>();
@@ -26,6 +30,7 @@ namespace Prototype
             directorRef = ServiceLocator.Instance.GetService<AIDirectorService>();
             directorRef.RegisterActor(CharacterAttitude, character);
             stateMachine = new StateMachine<CharacterStates>();
+            SetUpStateMachine();
         }
 
         private void SetUpStateMachine()
@@ -35,11 +40,14 @@ namespace Prototype
 
             wanderState.transitions[CharacterStates.Idle].TargetState = idleState;
             idleState.transitions[CharacterStates.Wandering].TargetState = wanderState;
+
+            stateMachine.SetStartingState(idleState);
         }
 
         private void Update()
         {
             stateMachine.Update();
+            activeState = stateMachine.GetCurrentState();
         }
 
         public float GetWanderDestination()

@@ -5,11 +5,13 @@ namespace Prototype.StateMachine
     public class WanderState : AICharacterState
     {
         float wanderTarget;
-        float tolerance = 0.1f;
+        float tolerance = 0.3f;
         LessThanCondition<float> withinToleranceCondition;
 
-        public WanderState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c) { 
-        
+        public WanderState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c) 
+        {
+
+            stateValue = CharacterStates.Wandering;
             Transition<CharacterStates> toIdleTransition = new Transition<CharacterStates>();
             withinToleranceCondition = new LessThanCondition<float>(tolerance);
             toIdleTransition.SetCondition(withinToleranceCondition);
@@ -25,6 +27,7 @@ namespace Prototype.StateMachine
 
         protected override void OnExit()
         {
+            controller.MoveInDirection(0);
             // Attack if in range
             Flush();
         }
@@ -37,7 +40,7 @@ namespace Prototype.StateMachine
 
 
             // Check conditions
-            withinToleranceCondition.SetValue(distance);
+            withinToleranceCondition.SetValue(Mathf.Abs(distance));
         }
     }
 }
