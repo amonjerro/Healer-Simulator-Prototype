@@ -15,6 +15,14 @@ namespace Prototype.StateMachine
         Fleeing
     }
 
+    public enum AbilityStates
+    {
+        ChooseAbility,
+        ChooseTarget,
+        UsingAbility
+    }
+
+
     /// <summary>
     /// States for the game state machine
     /// </summary>
@@ -53,6 +61,14 @@ namespace Prototype.StateMachine
         public void Exit()
         {
             OnExit();
+        }
+
+        protected void Flush()
+        {
+            foreach (Transition<EState> transition in transitions.Values)
+            {
+                transition.ResetCondition();
+            }
         }
 
         // Debug functions

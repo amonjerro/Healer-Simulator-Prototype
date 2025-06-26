@@ -1753,8 +1753,8 @@ MonoBehaviour:
   StatsContainer: {fileID: 395956592}
   MemberStatsPrefab: {fileID: 4125661989659717719, guid: 0ce6c90ddc5847f4e8b79b388e4b5fd3, type: 3}
   Party:
-  - {fileID: 699950863088637309, guid: 80b09c2fae5b44646bde0feded95c7c2, type: 3}
-  - {fileID: 2032565485329500210, guid: 94d5b0709681db5479b009edd8dfc6b4, type: 3}
+  - {fileID: 4209904454774020314, guid: 80b09c2fae5b44646bde0feded95c7c2, type: 3}
+  - {fileID: 1112639030845239980, guid: 94d5b0709681db5479b009edd8dfc6b4, type: 3}
 --- !u!4 &1814986392
 Transform:
   m_ObjectHideFlags: 0
@@ -1764,7 +1764,7 @@ Transform:
   m_GameObject: {fileID: 1814986390}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.474112, y: 1.8910266, z: -0.011881632}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

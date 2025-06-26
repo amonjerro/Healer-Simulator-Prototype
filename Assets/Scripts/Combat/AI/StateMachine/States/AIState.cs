@@ -13,12 +13,6 @@ namespace Prototype.StateMachine
             this.controller = controller;
         }
 
-        protected void Flush()
-        {
-            foreach (Transition<CharacterStates> transition in transitions.Values)
-            {
-                transition.ResetCondition();
-            }
-        }
+        
     }
 }

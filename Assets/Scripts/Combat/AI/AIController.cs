@@ -30,10 +30,10 @@ namespace Prototype
             directorRef = ServiceLocator.Instance.GetService<AIDirectorService>();
             directorRef.RegisterActor(CharacterAttitude, character);
             stateMachine = new StateMachine<CharacterStates>();
-            SetUpStateMachine();
+            SetupStateMachine();
         }
 
-        private void SetUpStateMachine()
+        protected void SetupStateMachine()
         {
             WanderState wanderState = new WanderState(stateMachine, this);
             IdleState idleState = new IdleState(stateMachine, this);

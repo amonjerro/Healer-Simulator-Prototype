@@ -9,10 +9,11 @@ namespace Prototype
     public class PlayerController : MonoBehaviour
     {
         CharacterEventManager eventManager;
+        PlayerAbilityHandler abilityHandler;
 
         private void Start()
         {
-            
+            abilityHandler = GetComponent<PlayerAbilityHandler>();
             Character character = GetComponentInParent<Character>();
             eventManager = character.GetComponentInParent<CharacterEventManager>();
             ServiceLocator.Instance.GetService<AIDirectorService>().RegisterActor(ActorAttitude.Player, character);
@@ -34,7 +35,7 @@ namespace Prototype
         /// </summary>
         /// <param name="val"></param>
         private void OnAbilityOne(InputValue val) {
-        
+            abilityHandler.HandleInput(InputKeys.One);
         }
 
 
@@ -42,19 +43,22 @@ namespace Prototype
         /// Broadcasts that the player wants to execute the second ability in their loadout
         /// </summary>
         /// <param name="val"></param>
-        private void OnAbilityTwo(InputValue val) { 
-        
+        private void OnAbilityTwo(InputValue val) {
+            abilityHandler.HandleInput(InputKeys.Two);
         }
 
-
+        
         /// <summary>
         /// Broadcasts that the player wants to execute the third ability in their loadout
         /// </summary>
         /// <param name="val"></param>
-        private void OnAbilityThree(InputValue val)
-        {
-
+        private void OnAbilityThree(InputValue val){
+            abilityHandler.HandleInput(InputKeys.Three);
         }
-        
+
+        private void OnCancel(InputValue val) {
+            abilityHandler.HandleCancel();
+        }
+
     }
 }
