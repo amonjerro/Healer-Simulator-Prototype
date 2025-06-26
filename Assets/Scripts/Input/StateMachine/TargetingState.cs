@@ -29,6 +29,11 @@ namespace Prototype.StateMachine
             Flush();
         }
 
+        public override CharacterEvent GetAbilityEvent(InputKeys k)
+        {
+            throw new System.NotImplementedException();
+        }
+
         protected override void OnUpdate()
         {
             cancelCondition.SetValue(IsCancelInput(inputKey));

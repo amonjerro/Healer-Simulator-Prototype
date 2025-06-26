@@ -101,6 +101,11 @@ namespace Prototype.StateMachine
             conditionType = ConditionType.Greater;
         }
 
+        public void UpdateThreshold(T newThreshold)
+        {
+            Threshold = newThreshold;
+        }
+
         public override bool Test()
         {
             return ConditionValue.CompareTo(Threshold) >= 0;

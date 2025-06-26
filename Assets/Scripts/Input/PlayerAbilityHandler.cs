@@ -16,7 +16,6 @@ namespace Prototype
 
 
         StateMachine<AbilityStates> stateMachine;
-        InputKeys lastKeyPressed;
 
         private void Awake()
         {
@@ -27,21 +26,24 @@ namespace Prototype
         private void Update()
         {
             stateMachine.Update();
-            lastKeyPressed = InputKeys.None;
         }
 
         protected void SetupStateMachine() { 
             
         }
 
-        public void HandleInput(InputKeys key) { 
-        
-            lastKeyPressed = key;
+        public CharacterEvent HandleInput(InputKeys key) 
+        {
+            AbsPlayerAbilityState state = (AbsPlayerAbilityState)stateMachine.CurrentState;
+            CharacterEvent e = state.GetAbilityEvent(key);
+            return e;
         }
 
-        public void HandleCancel()
+        public CharacterEvent HandleCancel()
         {
-            lastKeyPressed = InputKeys.Cancel;
+            AbsPlayerAbilityState state = (AbsPlayerAbilityState)stateMachine.CurrentState;
+            CharacterEvent e = state.GetAbilityEvent(InputKeys.Cancel);
+            return e;
         }
     }
 }
