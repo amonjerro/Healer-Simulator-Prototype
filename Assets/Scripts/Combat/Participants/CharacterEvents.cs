@@ -1,27 +1,36 @@
-
-using System;
-using UnityEngine;
-
 namespace Prototype
 {
 
     public enum CharacterEventTypes
     {
         Movement,
+        SetSkillTarget,
+        SkillReady,
         SkillUse,
         DamageTaken,
         Death
     }
 
-    public class CharacterEvent
+    public abstract class CharacterEvent
     {
-        public CharacterEventTypes eventType;
-        public float eventValue;
+        public CharacterEventTypes eventType { get; private set; }
+        public abstract object EventValue { get; }
 
-        public CharacterEvent(CharacterEventTypes eventType, float eventValue)
+        public CharacterEvent(CharacterEventTypes eventType)
         {
             this.eventType = eventType;
-            this.eventValue = eventValue;
+        }
+    }
+
+    public class CharacterEvent<T> : CharacterEvent
+    {
+        public T Value {  get; set; }
+
+        public override object EventValue { get { return Value; } }
+
+        public CharacterEvent(CharacterEventTypes t, T val) : base(t)
+        {
+            Value = val;
         }
     }
 

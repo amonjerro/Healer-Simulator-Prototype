@@ -176,6 +176,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterDataAsset: {fileID: 11400000, guid: d95362ef4d0748b4b93754ddc5fc5a04, type: 2}
+  abilities:
+  - {fileID: 11400000, guid: a6d7bdf503a894847b0248350766ba01, type: 2}
+  - {fileID: 11400000, guid: 402832c02fcde6345bf2bf50c1f7e32f, type: 2}
+  - {fileID: 11400000, guid: 66ded6a521777f24bb1321c994ccd34a, type: 2}
 --- !u!61 &2953385241201850547
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -304,6 +308,7 @@ GameObject:
   - component: {fileID: 2071095153613107829}
   - component: {fileID: 2598291631205361750}
   - component: {fileID: 585345175692569850}
+  - component: {fileID: 8038711634977885166}
   m_Layer: 6
   m_Name: MovementController
   m_TagString: Untagged
@@ -380,3 +385,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdfc50681a7271428a4df6e7ec2258f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8038711634977885166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475202539032150585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df4f8bdf0558f5a4aad68c2811fab271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0

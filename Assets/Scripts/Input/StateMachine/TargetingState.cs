@@ -1,11 +1,14 @@
+using static UnityEngine.GraphicsBuffer;
+
 namespace Prototype.StateMachine
 {
     public class TargetingState : AbsPlayerAbilityState
     {
         EqualsCondition<bool> cancelCondition;
         EqualsCondition<bool> targetChosenCondition;
-        public TargetingState()
+        public TargetingState() : base()
         {
+            stateValue = AbilityStates.ChooseTarget;
             cancelCondition = new EqualsCondition<bool>(true);
             targetChosenCondition = new EqualsCondition<bool>(true);
 
@@ -26,6 +29,12 @@ namespace Prototype.StateMachine
 
         protected override void OnExit()
         {
+            // Set the ability target
+            if (IsTargetingInput(inputKey))
+            {
+                CharacterEvent ev = new CharacterEvent<int>(CharacterEventTypes.SetSkillTarget, (int)inputKey);
+                handler.PublishMessage(ev);
+            }
             Flush();
         }
 

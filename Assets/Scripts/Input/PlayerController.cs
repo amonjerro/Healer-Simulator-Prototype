@@ -26,7 +26,7 @@ namespace Prototype
         private void OnMove(InputValue val)
         {
             Vector2 moveValue = val.Get<Vector2>();
-            CharacterEvent ev = new CharacterEvent(CharacterEventTypes.Movement, moveValue.x);
+            CharacterEvent ev = new CharacterEvent<float>(CharacterEventTypes.Movement, moveValue.x);
             eventManager.BroadcastCharacterEvent(ev);
         }
 

@@ -20,6 +20,8 @@ namespace Prototype
         SpriteRenderer spriteRenderer;
         Animator animator;
 
+        bool movementStopped = false;
+
         private void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
@@ -35,7 +37,7 @@ namespace Prototype
         {
             switch (e.eventType) {
                 case CharacterEventTypes.Movement:
-                    ProcessMove(e.eventValue);
+                    ProcessMove((float)e.EventValue);
                     break;
                 default:
                     return;
@@ -50,6 +52,8 @@ namespace Prototype
         /// <param name="value"></param>
         private void ProcessMove(float value)
         {
+            if (movementStopped) return;
+
             animator.SetFloat("fVelocity", Mathf.Abs(value));
             if (value < 0)
             {

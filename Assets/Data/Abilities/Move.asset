@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a98a0741b392794788a5490ee5e21d7, type: 3}
   m_Name: Move
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  data:
-    name: Move!
-    effectType: 3
-    abilityType: 2
-    power: 10
+  icon: {fileID: 114832869553252984, guid: 9157a2fa82625be428e1b7cc1c83baa4, type: 3}
+  abilityName: Back!
+  power: 10
+  effectType: 3
+  abilityType: 2
+  appliesStatus: 0
+  statusEffectData: {fileID: 0}
+  effectData:
     healthFactor: 0
-    confidenceFactor: 0
-    stubbornessFactor: 0
+    confidenceFactor: -0.5
+    stubbornessFactor: 1
+  animationDuration: 0

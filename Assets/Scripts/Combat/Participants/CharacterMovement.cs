@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Prototype
@@ -10,12 +11,14 @@ namespace Prototype
     {
         float directionX;
         float moveVelocity;
+        float activeMoveVelocity;
         Transform parentObject;
 
         private void Start()
         {
             parentObject = transform.parent;
             parentObject.GetComponent<CharacterEventManager>().onCharacterEvent += HandleCharacterEvent;
+            activeMoveVelocity = moveVelocity;
         }
 
         private void Update()
@@ -34,7 +37,7 @@ namespace Prototype
                 return;
             }
 
-            SetMoveDirection(ev.eventValue);
+            SetMoveDirection((float) ev.EventValue);
         }
 
         /// <summary>

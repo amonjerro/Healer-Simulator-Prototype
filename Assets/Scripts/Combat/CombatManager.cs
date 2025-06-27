@@ -10,8 +10,7 @@ namespace Prototype
     /// </summary>
     public class CombatManager : MonoBehaviour
     {
-        public static Action<SingleTargetAbility> TargetingAbilitySelected;
-        public static Action CancelTargetingAbility;
+
 
         [SerializeField]
         GameObject StatsContainer;

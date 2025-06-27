@@ -8,7 +8,7 @@ namespace Prototype
         Defiant
     }
 
-    class StatusEffect
+    public class StatusEffect
     {
         float expectedDuration;
         float elapsed;

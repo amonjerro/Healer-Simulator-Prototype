@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a98a0741b392794788a5490ee5e21d7, type: 3}
-  m_Name: Heal
+  m_Name: Empower
   m_EditorClassIdentifier: 
-  icon: {fileID: -9063044017300439947, guid: 275001a84ee075e45bd9b9d2c4b0493a, type: 3}
-  abilityName: Heal
-  power: 20
-  effectType: 0
-  abilityType: 1
-  appliesStatus: 0
-  statusEffectData: {fileID: 0}
+  icon: {fileID: -5618141903027225119, guid: f7afea0041bdf614a930d01349016b87, type: 3}
+  abilityName: Empower
+  power: 15
+  effectType: 2
+  abilityType: 2
+  appliesStatus: 1
+  statusEffectData: {fileID: 11400000, guid: 50e29fee42e089a49a0a54f54f297b06, type: 2}
   effectData:
-    healthFactor: 1
-    confidenceFactor: 0.5
-    stubbornessFactor: -0.2
-  animationDuration: 1
+    healthFactor: 0
+    confidenceFactor: 0
+    stubbornessFactor: 0
+  animationDuration: 0

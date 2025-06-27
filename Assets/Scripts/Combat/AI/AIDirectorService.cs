@@ -51,5 +51,14 @@ namespace Prototype
             return maxX;
         }
 
+        public Character GetFriendlyCharacterByIndex(int index)
+        {
+            return friendlyAIs[index];
+        }
+
+        public Character GetHostileCharacterByIndex(int index)
+        {
+            return hostileAIs[index];
+        }
     }
 }

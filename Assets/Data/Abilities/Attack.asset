@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a98a0741b392794788a5490ee5e21d7, type: 3}
   m_Name: Attack
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: -5618141903027225119, guid: f7afea0041bdf614a930d01349016b87, type: 3}
   abilityName: 
   power: 0
   effectType: 0
@@ -23,3 +23,4 @@ MonoBehaviour:
     healthFactor: 0
     confidenceFactor: 0
     stubbornessFactor: 0
+  animationDuration: 0

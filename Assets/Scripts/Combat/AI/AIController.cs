@@ -55,8 +55,8 @@ namespace Prototype
             return directorRef.GetPlayerPosition() + Random.Range(-1.0f, 1.0f);
         }
 
-        public void MoveInDirection(float direction) { 
-            CharacterEvent ce = new CharacterEvent(CharacterEventTypes.Movement, direction);
+        public void MoveInDirection(float direction) {
+            CharacterEvent ce = new CharacterEvent<float>(CharacterEventTypes.Movement, direction);
             eventManager.BroadcastCharacterEvent(ce);
         }
     }

@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using UnityEngine;
 
 namespace Prototype
@@ -19,6 +18,12 @@ namespace Prototype
         VoiceCommand
     }
 
+    public enum AbilityTargetType
+    {
+        SingleTarget,
+        AllTargets
+    }
+
     [Serializable]
     public class AbilityEffectData
     {
@@ -30,6 +35,7 @@ namespace Prototype
     public abstract class Ability
     {
         protected AbilityEffectData data;
+        protected StatusEffect statusEffect;
 
         protected abstract void WillExecute();
 
@@ -56,6 +62,11 @@ namespace Prototype
         {
             OnCancel();
         }
+        
+        public void SetStatusEffect(StatusEffectData effectData)
+        {
+            statusEffect = new StatusEffect(effectData);
+        }
     }
 
     public class SingleTargetAbility : Ability
@@ -63,12 +74,12 @@ namespace Prototype
         Character target;
         protected override void WillExecute()
         {
-            CombatManager.TargetingAbilitySelected?.Invoke(this);
+            
         }
 
         protected override void OnCancel()
         {
-            CombatManager.CancelTargetingAbility?.Invoke();
+            
         }
 
         public void SetTarget(Character target) { 
@@ -83,6 +94,7 @@ namespace Prototype
 
             System.Diagnostics.Debug.Assert(data != null);
 
+            UnityEngine.Debug.Log("Executing!");
             
 
         }

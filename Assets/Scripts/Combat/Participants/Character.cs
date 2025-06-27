@@ -1,6 +1,5 @@
 using Prototype.UI;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 namespace Prototype
 {
@@ -16,8 +15,12 @@ namespace Prototype
         CharacterData data;
         List<StatusEffect> activeStatusEffects;
 
+        [SerializeField]
+        List<AbilityDataObject> abilities;
+
         MemberStats statsUI;
 
+        Ability readiedAbility;
 
         void Awake()
         {
@@ -27,6 +30,8 @@ namespace Prototype
             data.Reset();
             activeStatusEffects = new List<StatusEffect>();
             CharacterMovement movementRef = GetComponentInChildren<CharacterMovement>();
+            CharacterEventManager eventManager = GetComponent<CharacterEventManager>();
+            eventManager.onCharacterEvent += ProcessEvents;
             movementRef.SetMovementVelocity(_characterDataAsset.MoveSpeed);
         }
 
@@ -111,6 +116,54 @@ namespace Prototype
         {
             CharacterView characterView = GetComponentInChildren<CharacterView>();
             statsUI.SetPortrait(characterView.GetSprite());
+        }
+
+        private void ProcessEvents(CharacterEvent ev)
+        {
+            switch (ev.eventType)
+            {
+                case CharacterEventTypes.SkillReady:
+                    ReadyAbility((int)ev.EventValue);
+                    return;
+                case CharacterEventTypes.SkillUse:
+                    UseAbility((bool)ev.EventValue);
+                    return;
+                case CharacterEventTypes.SetSkillTarget:
+                    ReadyTarget((int) ev.EventValue);
+                    return;
+                default:
+                    return;
+            }
+        }
+
+        /*
+         Ability Management
+        */
+
+        private void ReadyAbility(int value)
+        {
+            readiedAbility = AbilityFactory.MakeAbility(abilities[value]);
+        }
+        
+        private void ReadyTarget(int value)
+        {
+            SingleTargetAbility sta = (SingleTargetAbility) readiedAbility;
+            sta.SetTarget(ServiceLocator.Instance.GetService<AIDirectorService>().GetFriendlyCharacterByIndex(value));
+        }
+
+        private void UseAbility(bool trigger)
+        {
+            if (trigger)
+            {
+                readiedAbility.Execute();
+                return;
+            }
+
+            if (readiedAbility == null) return;
+
+            readiedAbility.Cancel();
+            readiedAbility = null;
+
         }
     }
 }
