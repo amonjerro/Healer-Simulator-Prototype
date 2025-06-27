@@ -58,6 +58,12 @@ namespace Prototype
             }
         }
 
+        private void OnDestroy()
+        {
+            CharacterEventManager eventManager = GetComponent<CharacterEventManager>();
+            eventManager.onCharacterEvent -= ProcessEvents;
+        }
+
         /// <summary>
         /// Gets this characters stats
         /// </summary>
@@ -159,7 +165,9 @@ namespace Prototype
         {
             if (trigger)
             {
+                data.CurrentMana -= readiedAbility.GetCost();
                 readiedAbility.Execute();
+                UpdateUI();
                 return;
             }
 

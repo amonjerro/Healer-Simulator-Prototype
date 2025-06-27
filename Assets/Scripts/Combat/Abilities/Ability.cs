@@ -32,8 +32,17 @@ namespace Prototype
         public float stubbornessFactor;
     }
 
+    [Serializable]
+    public class AbilityInformation
+    {
+        public string abilityName;
+        public int power;
+        public int cost;
+    }
+
     public abstract class Ability
     {
+        protected AbilityInformation abilityInformation;
         protected AbilityEffectData abilityData;
         protected StatusEffect statusEffect;
 
@@ -68,8 +77,18 @@ namespace Prototype
             statusEffect = new StatusEffect(effectData);
         }
 
+        public void SetInformation(AbilityInformation info)
+        {
+            abilityInformation = info;
+        }
+
         public void SetEffectData(AbilityEffectData effectData) { 
             abilityData = effectData;
+        }
+
+        public int GetCost()
+        {
+            return abilityInformation.cost;
         }
 
         protected void ApplyAbility(CharacterData data)

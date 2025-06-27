@@ -12,11 +12,11 @@ namespace Prototype
         None
     }
 
-    public class PlayerAbilityHandler : MonoBehaviour {
+    public class PlayerAbilityHandler : MonoBehaviour
+    {
 
         CharacterEventManager eventManager;
         StateMachine<AbilityStates> stateMachine;
-        CastingState castingState;
         InputKeys lastKeyPressed;
 
         [SerializeField]
@@ -42,9 +42,10 @@ namespace Prototype
             lastKeyPressed = InputKeys.None;
         }
 
-        protected void SetupStateMachine() { 
+        protected void SetupStateMachine()
+        {
             // Create the states
-            castingState = new CastingState();
+            CastingState castingState = new CastingState();
             castingState.SetAbilityHandler(this);
             AwaitingState awaiting = new AwaitingState();
             awaiting.SetAbilityHandler(this);
@@ -61,7 +62,7 @@ namespace Prototype
             stateMachine.SetStartingState(awaiting);
         }
 
-        public void HandleInput(InputKeys key) 
+        public void HandleInput(InputKeys key)
         {
             lastKeyPressed = key;
         }

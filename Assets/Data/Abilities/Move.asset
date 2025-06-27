@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: Move
   m_EditorClassIdentifier: 
   icon: {fileID: 114832869553252984, guid: 9157a2fa82625be428e1b7cc1c83baa4, type: 3}
-  abilityName: Back!
-  power: 10
   effectType: 3
   abilityType: 2
+  abilityTargetType: 0
+  sideTargeted: 0
   appliesStatus: 0
+  abilityInformation:
+    abilityName: Move
+    power: 10
+    cost: 0
   statusEffectData: {fileID: 0}
   effectData:
     healthFactor: 0

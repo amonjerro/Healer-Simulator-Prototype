@@ -1,6 +1,3 @@
-using UnityEditor.Playables;
-using UnityEngine;
-
 namespace Prototype.StateMachine
 {
     public class AwaitingState : AbsPlayerAbilityState
@@ -21,6 +18,7 @@ namespace Prototype.StateMachine
             // Unstage powers
             CharacterEvent ev = new CharacterEvent<bool>(CharacterEventTypes.SkillUse, false);
             handler.PublishMessage(ev);
+
         }
 
         protected override void OnExit()

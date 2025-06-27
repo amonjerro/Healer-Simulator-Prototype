@@ -13,14 +13,18 @@ MonoBehaviour:
   m_Name: Heal
   m_EditorClassIdentifier: 
   icon: {fileID: -9063044017300439947, guid: 275001a84ee075e45bd9b9d2c4b0493a, type: 3}
-  abilityName: Heal
-  power: 20
   effectType: 0
   abilityType: 1
+  abilityTargetType: 0
+  sideTargeted: 0
   appliesStatus: 0
+  abilityInformation:
+    abilityName: Heal
+    power: 20
+    cost: 5
   statusEffectData: {fileID: 0}
   effectData:
-    healthFactor: 1
-    confidenceFactor: 0.5
-    stubbornessFactor: -0.2
+    healthFactor: 8000
+    confidenceFactor: 4000
+    stubbornessFactor: -1600
   animationDuration: 1

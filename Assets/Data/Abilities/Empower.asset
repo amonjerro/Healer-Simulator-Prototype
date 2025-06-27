@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: Empower
   m_EditorClassIdentifier: 
   icon: {fileID: -5618141903027225119, guid: f7afea0041bdf614a930d01349016b87, type: 3}
-  abilityName: Empower
-  power: 15
   effectType: 2
   abilityType: 2
+  abilityTargetType: 0
+  sideTargeted: 0
   appliesStatus: 1
+  abilityInformation:
+    abilityName: Empower
+    power: 10
+    cost: 0
   statusEffectData: {fileID: 11400000, guid: 50e29fee42e089a49a0a54f54f297b06, type: 2}
   effectData:
     healthFactor: 0
