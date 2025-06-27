@@ -23,26 +23,11 @@ namespace Prototype
 
         public int CurrentHealth
         {
-            get
-            {
-                return _currentHealth;
-            }
+            get { return _currentHealth; }
 
-            set
-            {
-                if (value < 0)
-                {
-                    _currentHealth = 0;
-                    return;
-                }
-                if (value > maxHealth)
-                {
-                    _currentHealth = maxHealth;
-                    return;
-                }
-                _currentHealth = value;
-            }
+            set { _currentHealth = Mathf.Clamp(value, 0, maxHealth); }
         }
+
         public float GetFloatHealth()
         {
             return CurrentHealth / (float)maxHealth;
@@ -50,50 +35,15 @@ namespace Prototype
 
         public int CurrentConfidence
         {
-            get
-            {
-                return _currentConfidence;
-            }
+            get { return _currentConfidence; }
 
-            set
-            {
-                if (value < 0)
-                {
-                    _currentConfidence = 0;
-                    return;
-                }
-                if (value > CombatConstants.MaxConfidence)
-                {
-                   _currentConfidence = CombatConstants.MaxConfidence;
-                    return;
-                }
-                _currentConfidence = value;
-            }
+            set { _currentConfidence = Mathf.Clamp(value, 0, CombatConstants.MaxConfidence); }
         }
-
-        
-
-        
-
 
         public int CurrentStubborness
         {
             get { return _currentStubborness; }
-            set
-            {
-                if (value < 0)
-                {
-                    _currentStubborness = 0;
-                    return;
-                }
-                if (value > CombatConstants.MaxStubborness)
-                {
-                    _currentStubborness = CombatConstants.MaxStubborness;
-                    return;
-                }
-                _currentStubborness = value;
-
-            }
+            set { _currentStubborness = Mathf.Clamp(value, 0, CombatConstants.MaxStubborness); }
         }
 
         public float GetFloatStubborn()
@@ -105,22 +55,7 @@ namespace Prototype
         public int CurrentMana
         {
             get { return _currentMana; }
-            set
-            {
-                if (value < 0)
-                {
-                    _currentMana = 0;
-                    return;
-                }
-
-                if (value > maxMana)
-                {
-                    _currentMana = maxMana;
-                    return;
-                }
-
-                _currentMana = value;
-            }
+            set { _currentMana = Mathf.Clamp(value, 0, maxMana); }
         }
 
         public float GetFloatMana()
@@ -134,7 +69,7 @@ namespace Prototype
 
         public void Reset()
         {
-            _currentHealth = maxHealth;
+            _currentHealth = maxHealth /2;
             _currentMana = maxMana;
         }
     }

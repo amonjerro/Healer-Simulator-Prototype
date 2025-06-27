@@ -34,7 +34,7 @@ namespace Prototype
 
     public abstract class Ability
     {
-        protected AbilityEffectData data;
+        protected AbilityEffectData abilityData;
         protected StatusEffect statusEffect;
 
         protected abstract void WillExecute();
@@ -67,6 +67,22 @@ namespace Prototype
         {
             statusEffect = new StatusEffect(effectData);
         }
+
+        public void SetEffectData(AbilityEffectData effectData) { 
+            abilityData = effectData;
+        }
+
+        protected void ApplyAbility(CharacterData data)
+        {
+            data.CurrentHealth += (int) abilityData.healthFactor;
+            data.CurrentStubborness += (int) abilityData.stubbornessFactor;
+            data.CurrentConfidence += (int)abilityData.confidenceFactor;
+        }
+
+        protected void ApplyStatusEffect(Character character)
+        {
+            character.AddStatusEffect(statusEffect);
+        }
     }
 
     public class SingleTargetAbility : Ability
@@ -94,8 +110,9 @@ namespace Prototype
 
             System.Diagnostics.Debug.Assert(data != null);
 
-            UnityEngine.Debug.Log("Executing!");
-            
+            ApplyAbility(data);
+
+            target.ResolveCombatEffect();
 
         }
 

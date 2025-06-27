@@ -6,7 +6,7 @@ namespace Prototype
     public class AIDirectorService : MonoBehaviour
     {
         List<Character> hostileAIs;
-        List<Character> friendlyAIs;
+        List<Character> FriendlyCharacters;
         Character playerCharacter;
 
         [SerializeField]
@@ -15,7 +15,7 @@ namespace Prototype
         private void Awake()
         {
             hostileAIs = new List<Character>();
-            friendlyAIs = new List<Character>();
+            FriendlyCharacters = new List<Character>();
         }
 
         public void RegisterActor(ActorAttitude attitude, Character controller)
@@ -23,11 +23,12 @@ namespace Prototype
             switch (attitude)
             {
                 case ActorAttitude.Friendly:
-                    friendlyAIs.Add(controller);
+                    FriendlyCharacters.Add(controller);
                     EmitActorRegistered(controller);
                     return;
                 case ActorAttitude.Player:
                     playerCharacter = controller;
+                    FriendlyCharacters.Add(controller);
                     EmitActorRegistered(playerCharacter);
                     return;
                 default:
@@ -53,7 +54,7 @@ namespace Prototype
 
         public Character GetFriendlyCharacterByIndex(int index)
         {
-            return friendlyAIs[index];
+            return FriendlyCharacters[index];
         }
 
         public Character GetHostileCharacterByIndex(int index)

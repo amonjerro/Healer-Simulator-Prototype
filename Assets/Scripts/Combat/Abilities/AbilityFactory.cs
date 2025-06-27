@@ -7,6 +7,7 @@ namespace Prototype
             switch (dataObject.abilityTargetType) {
                 case AbilityTargetType.SingleTarget:
                     Ability ab = new SingleTargetAbility();
+                    ab = ComputeEffectData(dataObject, ab);
                     if (dataObject.appliesStatus)
                     {
                         ab = AddStatusEffectData(dataObject, ab);
@@ -16,6 +17,15 @@ namespace Prototype
                 default:
                     return null;
             }
+        }
+
+        public static Ability ComputeEffectData(AbilityDataObject dataObject, Ability ability) {
+            AbilityEffectData computedData = dataObject.effectData;
+            computedData.confidenceFactor *= dataObject.power;
+            computedData.stubbornessFactor *= dataObject.power;
+            computedData.healthFactor *= dataObject.power;
+            ability.SetEffectData(computedData);
+            return ability;
         }
 
         public static Ability AddStatusEffectData(AbilityDataObject dataObject, Ability ability) {

@@ -71,11 +71,15 @@ namespace Prototype
         /// <summary>
         /// Add a status effect to this character
         /// </summary>
-        /// <param name="dataConfig"></param>
-        public void AddStatusEffect(StatusEffectData dataConfig)
+        /// <param name="effect">The status effect to apply</param>
+        public void AddStatusEffect(StatusEffect effect)
         {
-            StatusEffect effect = new StatusEffect(dataConfig);
             activeStatusEffects.Add(effect);
+        }
+
+        public void ResolveCombatEffect()
+        {
+            UpdateUI();
         }
 
         /// <summary>
