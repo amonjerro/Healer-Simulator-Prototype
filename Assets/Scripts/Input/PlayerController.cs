@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,7 +36,10 @@ namespace Prototype
         /// </summary>
         /// <param name="val"></param>
         private void OnAbilityOne(InputValue val) {
-            abilityHandler.HandleInput(InputKeys.One);
+            CharacterEvent e = abilityHandler.HandleInput(InputKeys.One);
+            if (e != null) {
+                eventManager.BroadcastCharacterEvent(e);
+            }
         }
 
 
@@ -44,7 +48,11 @@ namespace Prototype
         /// </summary>
         /// <param name="val"></param>
         private void OnAbilityTwo(InputValue val) {
-            abilityHandler.HandleInput(InputKeys.Two);
+            CharacterEvent e = abilityHandler.HandleInput(InputKeys.Two);
+            if (e != null)
+            {
+                eventManager.BroadcastCharacterEvent(e);
+            }
         }
 
         
@@ -53,7 +61,11 @@ namespace Prototype
         /// </summary>
         /// <param name="val"></param>
         private void OnAbilityThree(InputValue val){
-            abilityHandler.HandleInput(InputKeys.Three);
+            CharacterEvent e = abilityHandler.HandleInput(InputKeys.Three);
+            if (e != null)
+            {
+                eventManager.BroadcastCharacterEvent(e);
+            }
         }
 
         private void OnCancel(InputValue val) {
