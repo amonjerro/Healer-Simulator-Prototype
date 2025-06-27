@@ -61,18 +61,14 @@ namespace Prototype
             stateMachine.SetStartingState(awaiting);
         }
 
-        public CharacterEvent HandleInput(InputKeys key) 
+        public void HandleInput(InputKeys key) 
         {
-            AbsPlayerAbilityState state = (AbsPlayerAbilityState)stateMachine.CurrentState;
-            CharacterEvent e = state.GetAbilityEvent(key);
-            return e;
+            lastKeyPressed = key;
         }
 
-        public CharacterEvent HandleCancel()
+        public void HandleCancel()
         {
-            AbsPlayerAbilityState state = (AbsPlayerAbilityState)stateMachine.CurrentState;
-            CharacterEvent e = state.GetAbilityEvent(InputKeys.Cancel);
-            return e;
+            lastKeyPressed = InputKeys.Cancel;
         }
 
         public void PublishMessage(CharacterEvent ev)

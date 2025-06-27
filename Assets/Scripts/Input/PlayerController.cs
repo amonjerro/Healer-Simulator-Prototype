@@ -36,10 +36,7 @@ namespace Prototype
         /// </summary>
         /// <param name="val"></param>
         private void OnAbilityOne(InputValue val) {
-            CharacterEvent e = abilityHandler.HandleInput(InputKeys.One);
-            if (e != null) {
-                eventManager.BroadcastCharacterEvent(e);
-            }
+            abilityHandler.HandleInput(InputKeys.One);
         }
 
 
@@ -48,11 +45,7 @@ namespace Prototype
         /// </summary>
         /// <param name="val"></param>
         private void OnAbilityTwo(InputValue val) {
-            CharacterEvent e = abilityHandler.HandleInput(InputKeys.Two);
-            if (e != null)
-            {
-                eventManager.BroadcastCharacterEvent(e);
-            }
+            abilityHandler.HandleInput(InputKeys.Two);
         }
 
         
@@ -61,11 +54,7 @@ namespace Prototype
         /// </summary>
         /// <param name="val"></param>
         private void OnAbilityThree(InputValue val){
-            CharacterEvent e = abilityHandler.HandleInput(InputKeys.Three);
-            if (e != null)
-            {
-                eventManager.BroadcastCharacterEvent(e);
-            }
+            abilityHandler.HandleInput(InputKeys.Three);
         }
 
         private void OnCancel(InputValue val) {

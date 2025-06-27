@@ -39,10 +39,6 @@ namespace Prototype.StateMachine
         {
             targetingInputCondition.SetValue(IsAbilityInput(inputKey));
         }
-        public override CharacterEvent GetAbilityEvent(InputKeys k)
-        {
-            throw new System.NotImplementedException();
-        }
 
         private bool IsAbilityInput(InputKeys k)
         {
