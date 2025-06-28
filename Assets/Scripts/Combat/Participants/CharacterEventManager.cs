@@ -6,15 +6,15 @@ namespace Prototype
     public class CharacterEventManager : MonoBehaviour
     {
         public Action<CharacterEvent> onCharacterEvent;
-
-        private void Start()
-        {
-
-        }
+        public Action<CharacterEvent> onStatusChange;
 
         public void BroadcastCharacterEvent(CharacterEvent characterEvent)
         {
             onCharacterEvent?.Invoke(characterEvent);
+        }
+
+        public void BroadcastStatusChange(CharacterEvent characterEvent) { 
+            onStatusChange?.Invoke(characterEvent);
         }
     }
 }

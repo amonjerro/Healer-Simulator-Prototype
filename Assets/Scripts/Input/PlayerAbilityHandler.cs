@@ -1,4 +1,5 @@
 using Prototype.StateMachine;
+using System.Diagnostics;
 using UnityEngine;
 
 namespace Prototype
@@ -19,6 +20,8 @@ namespace Prototype
         StateMachine<AbilityStates> stateMachine;
         InputKeys lastKeyPressed;
 
+        bool[] abilityAvailability;
+
         [SerializeField]
         AbilityStates currentState;
 
@@ -28,6 +31,7 @@ namespace Prototype
             stateMachine = new StateMachine<AbilityStates>();
             SetupStateMachine();
             eventManager = GetComponentInParent<CharacterEventManager>();
+            eventManager.onStatusChange += ProcessEvents;
         }
 
         private void Update()
@@ -75,6 +79,23 @@ namespace Prototype
         public void PublishMessage(CharacterEvent ev)
         {
             eventManager.BroadcastCharacterEvent(ev);
+        }
+
+        public bool CheckAbilityAvailability(int index)
+        {
+            return index >= abilityAvailability.Length ? false : abilityAvailability[index];
+        }
+
+        private void ProcessEvents(CharacterEvent ev)
+        {
+            switch (ev.eventType)
+            {
+                case CharacterEventTypes.AbilityAvailabilityChange:
+                    abilityAvailability = ev.EventValue as bool[];
+                    return;
+                default:
+                    return;
+            }
         }
     }
 }

@@ -3,10 +3,14 @@ namespace Prototype
 
     public enum CharacterEventTypes
     {
+        // Input Enums
         Movement,
         SetSkillTarget,
         SkillReady,
         SkillUse,
+
+        // Status Enums
+        AbilityAvailabilityChange,
         DamageTaken,
         Death
     }

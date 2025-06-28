@@ -20,11 +20,11 @@ MonoBehaviour:
   appliesStatus: 0
   abilityInformation:
     abilityName: Heal
-    power: 20
-    cost: 5
+    power: 1
+    cost: 20
   statusEffectData: {fileID: 0}
   effectData:
-    healthFactor: 8000
-    confidenceFactor: 4000
-    stubbornessFactor: -1600
+    healthFactor: 1
+    confidenceFactor: 0.5
+    stubbornessFactor: -0.5
   animationDuration: 1

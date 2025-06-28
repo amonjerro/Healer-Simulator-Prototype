@@ -1,5 +1,7 @@
 using Prototype.UI;
 using System.Collections.Generic;
+using System.Data;
+using Unity.VisualScripting;
 using UnityEngine;
 namespace Prototype
 {
@@ -19,8 +21,9 @@ namespace Prototype
         List<AbilityDataObject> abilities;
 
         MemberStats statsUI;
-
+        CharacterEventManager eventManager;
         Ability readiedAbility;
+        
 
         void Awake()
         {
@@ -30,9 +33,14 @@ namespace Prototype
             data.Reset();
             activeStatusEffects = new List<StatusEffect>();
             CharacterMovement movementRef = GetComponentInChildren<CharacterMovement>();
-            CharacterEventManager eventManager = GetComponent<CharacterEventManager>();
+            eventManager = GetComponent<CharacterEventManager>();
             eventManager.onCharacterEvent += ProcessEvents;
             movementRef.SetMovementVelocity(_characterDataAsset.MoveSpeed);
+        }
+
+        private void Start()
+        {
+            eventManager.BroadcastStatusChange(MakeAbilityAvailabilityChangedEvent());
         }
 
         // Update is called once per frame
@@ -60,7 +68,6 @@ namespace Prototype
 
         private void OnDestroy()
         {
-            CharacterEventManager eventManager = GetComponent<CharacterEventManager>();
             eventManager.onCharacterEvent -= ProcessEvents;
         }
 
@@ -165,7 +172,12 @@ namespace Prototype
         {
             if (trigger)
             {
+                int cost = readiedAbility.GetCost();
+                if (cost > 0) {
+                    eventManager.BroadcastStatusChange(MakeAbilityAvailabilityChangedEvent());
+                }
                 data.CurrentMana -= readiedAbility.GetCost();
+
                 readiedAbility.Execute();
                 UpdateUI();
                 return;
@@ -175,7 +187,24 @@ namespace Prototype
 
             readiedAbility.Cancel();
             readiedAbility = null;
+        }
 
+        private CharacterEvent MakeAbilityAvailabilityChangedEvent()
+        {
+            bool[] abilityAvailability = new bool[CombatConstants.MaxAbilities];
+            for (int i = 0; i < CombatConstants.MaxAbilities; i++) { 
+                if (i >= abilities.Count)
+                {
+                    abilityAvailability[i] = false;
+                } else if (abilities[i].abilityInformation.cost > data.CurrentMana)
+                {
+                    abilityAvailability[i] = false;
+                } else {
+                    abilityAvailability[i] = true;
+                }
+            }
+
+            return new CharacterEvent<bool[]>(CharacterEventTypes.AbilityAvailabilityChange, abilityAvailability);
         }
     }
 }

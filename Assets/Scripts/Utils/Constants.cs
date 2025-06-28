@@ -4,5 +4,6 @@ namespace Prototype
     {
         public const int MaxConfidence = 100;
         public const int MaxStubborness = 100;
+        public const int MaxAbilities = 3;
     }
 }

@@ -25,6 +25,6 @@ MonoBehaviour:
   statusEffectData: {fileID: 0}
   effectData:
     healthFactor: 0
-    confidenceFactor: -0.5
+    confidenceFactor: -1
     stubbornessFactor: 1
   animationDuration: 0

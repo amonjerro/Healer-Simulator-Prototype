@@ -35,7 +35,7 @@ namespace Prototype.StateMachine
 
         protected override void OnUpdate()
         {
-            targetingInputCondition.SetValue(IsAbilityInput(inputKey));
+            targetingInputCondition.SetValue(IsAbilityInput(inputKey) && IsInputAvailable(inputKey));
         }
 
         private bool IsAbilityInput(InputKeys k)
@@ -48,6 +48,11 @@ namespace Prototype.StateMachine
                 default:
                     return false;
             }
+        }
+
+        private bool IsInputAvailable(InputKeys k)
+        {
+            return handler.CheckAbilityAvailability((int)inputKey);
         }
 
     }

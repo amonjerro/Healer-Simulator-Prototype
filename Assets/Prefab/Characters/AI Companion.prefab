@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterDataAsset: {fileID: 11400000, guid: 1edcc8e0b319f864889dea8a50d7a38b, type: 2}
+  abilities:
+  - {fileID: 11400000, guid: fc644aaa38e06db4a9b67b5c7af55655, type: 2}
 --- !u!61 &3202844313472475515
 BoxCollider2D:
   m_ObjectHideFlags: 0

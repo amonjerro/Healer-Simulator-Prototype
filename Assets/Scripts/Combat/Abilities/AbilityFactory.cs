@@ -5,10 +5,10 @@ namespace Prototype
         public Ability Ability { get; set; }
         public AbilityBuilder ComputeEffectData(AbilityDataObject dataObject)
         {
-            AbilityEffectData computedData = dataObject.effectData;
-            computedData.confidenceFactor *= dataObject.abilityInformation.power;
-            computedData.stubbornessFactor *= dataObject.abilityInformation.power;
-            computedData.healthFactor *= dataObject.abilityInformation.power;
+            AbilityEffectData computedData = new AbilityEffectData();
+            computedData.confidenceFactor =  dataObject.effectData.confidenceFactor * dataObject.abilityInformation.power;
+            computedData.stubbornessFactor =  dataObject.effectData.stubbornessFactor * dataObject.abilityInformation.power;
+            computedData.healthFactor = dataObject.effectData.healthFactor * dataObject.abilityInformation.power;
             Ability.SetEffectData(computedData);
             return this;
         }
