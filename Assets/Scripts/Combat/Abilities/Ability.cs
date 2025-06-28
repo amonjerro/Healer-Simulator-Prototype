@@ -130,15 +130,10 @@ namespace Prototype
         protected override void OnExecute()
         {
             System.Diagnostics.Debug.Assert(target != null);
-
             CharacterData data = target.GetCharacterData();
-
             System.Diagnostics.Debug.Assert(data != null);
-
             ApplyAbility(data);
-
-            target.ResolveCombatEffect();
-
+            target.ResolveCombatEffect((int)abilityData.healthFactor);
         }
 
         protected override void AfterExecute()

@@ -16,6 +16,9 @@ namespace Prototype
         [Tooltip("Specifies whether this character begins combat looking right")]
         bool startsFlipped;
 
+        [SerializeField]
+        GameObject floatingText;
+
         // Component references
         SpriteRenderer spriteRenderer;
         Animator animator;
@@ -39,6 +42,9 @@ namespace Prototype
                 case CharacterEventTypes.Movement:
                     ProcessMove((float)e.EventValue);
                     break;
+                case CharacterEventTypes.DamageTaken:
+                    ProcessDamageTaken((int)e.EventValue);
+                    break;
                 default:
                     return;
             }
@@ -61,6 +67,17 @@ namespace Prototype
             } else
             {
                 spriteRenderer.flipX = startsFlipped;
+            }
+        }
+
+        private void ProcessDamageTaken(int value)
+        {
+            GameObject text = Instantiate(floatingText, transform);
+            TextMesh textMesh = text.GetComponent<TextMesh>();
+            textMesh.text = Mathf.Abs(value).ToString();
+            if (value > 0)
+            {
+                textMesh.color = Color.green;
             }
         }
 

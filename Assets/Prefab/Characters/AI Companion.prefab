@@ -460,6 +460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldMoonwalk: 0
   startsFlipped: 0
+  floatingText: {fileID: 3352126934072587479, guid: 05d993541436f764ebf4aeb5911a0573, type: 3}
 --- !u!95 &2330685420449982917
 Animator:
   serializedVersion: 7

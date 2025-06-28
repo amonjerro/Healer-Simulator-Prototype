@@ -90,8 +90,10 @@ namespace Prototype
             activeStatusEffects.Add(effect);
         }
 
-        public void ResolveCombatEffect()
+        public void ResolveCombatEffect(int value)
         {
+            CharacterEvent<int> combatEffectEvent = new CharacterEvent<int>(CharacterEventTypes.DamageTaken, value);
+            eventManager.BroadcastCharacterEvent(combatEffectEvent);
             UpdateUI();
         }
 
@@ -153,6 +155,7 @@ namespace Prototype
             }
         }
 
+
         /*
          Ability Management
         */
@@ -181,6 +184,8 @@ namespace Prototype
 
                 eventManager.BroadcastCharacterEvent(new CharacterEvent<AudioClip>(CharacterEventTypes.PlayAudio, readiedAbility.GetSoundClip()));
                 readiedAbility.Execute();
+
+                // Feedback
                 UpdateUI();
                 return;
             }
