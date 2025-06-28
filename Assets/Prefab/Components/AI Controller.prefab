@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5662971151847104144}
-  m_Layer: 0
+  - component: {fileID: 5734433230665669350}
+  m_Layer: 7
   m_Name: AI Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,3 +32,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5734433230665669350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8937519401420434321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976664f62644fbd4dbf96d5577a8311e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterAttitude: 1
+  activeState: 0

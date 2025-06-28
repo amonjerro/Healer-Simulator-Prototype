@@ -1,8 +1,10 @@
 using System.Collections.Generic;
-using Prototype;
 
 namespace Prototype.StateMachine
 {
+    /// <summary>
+    /// Abstract AI Character state
+    /// </summary>
     public abstract class AICharacterState : AbsState<CharacterStates>
     {
         protected AIController controller;

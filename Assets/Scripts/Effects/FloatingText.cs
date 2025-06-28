@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Prototype
 {
+    /// <summary>
+    /// A floating text component for displaying damage and healing effects
+    /// </summary>
     public class FloatingText : MonoBehaviour
     {
         [SerializeField]
