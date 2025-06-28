@@ -10,20 +10,24 @@ namespace Prototype
     /// </summary>
     public class Character : MonoBehaviour
     {
+
         [SerializeField]
+        [Tooltip("The data asset for this character")]
         CharacterDataAsset _characterDataAsset;
+
+        [SerializeField]
+        [Tooltip("The data assets for this characters abilities")]
+        List<AbilityDataObject> abilities;
 
         CharacterData data;
         List<StatusEffect> activeStatusEffects;
-
-        [SerializeField]
-        List<AbilityDataObject> abilities;
-
         MemberStats statsUI;
         CharacterEventManager eventManager;
         Ability readiedAbility;
         
-
+        /*
+         Unity Lifecycle hooks
+         */
         void Awake()
         {
             data = new CharacterData();
@@ -41,6 +45,7 @@ namespace Prototype
 
         private void Start()
         {
+            // Update controllers with availability
             EmitAbilityAvailabilityChangedEvent();
         }
 
@@ -52,9 +57,14 @@ namespace Prototype
 
         private void OnDestroy()
         {
+            // Unsuscribe from events
             eventManager.onCharacterEvent -= ProcessEvents;
             TimeUtil.onTick -= HandleTick;
         }
+
+        /*
+            Data management 
+        */
 
         /// <summary>
         /// Gets this characters stats
@@ -65,7 +75,6 @@ namespace Prototype
             return data;
         }
 
-
         /// <summary>
         /// Add a status effect to this character
         /// </summary>
@@ -75,6 +84,10 @@ namespace Prototype
             activeStatusEffects.Add(effect);
         }
 
+        /// <summary>
+        /// Handles communicating to others that a combat effect has resolved
+        /// </summary>
+        /// <param name="value">The value of the effect</param>
         public void ResolveCombatEffect(int value)
         {
             CharacterEvent<int> combatEffectEvent = new CharacterEvent<int>(CharacterEventTypes.DamageTaken, value);
@@ -91,6 +104,10 @@ namespace Prototype
             _characterDataAsset = asset;
         }
 
+        /*
+            UI Configuration 
+        */
+
         /// <summary>
         /// Set the reference for this character UI and configure it
         /// </summary>
@@ -101,6 +118,11 @@ namespace Prototype
             UpdateUI();
             SetPortraitUI();
         }
+
+
+        /*
+            Private methods 
+        */
 
         /// <summary>
         /// Updates the stat values of the UI to provide players with feedback
@@ -122,6 +144,10 @@ namespace Prototype
             statsUI.SetPortrait(characterView.GetSprite());
         }
 
+        /// <summary>
+        /// Process events published through the event manager
+        /// </summary>
+        /// <param name="ev">The event that was emitted</param>
         private void ProcessEvents(CharacterEvent ev)
         {
             switch (ev.eventType)
@@ -140,6 +166,9 @@ namespace Prototype
             }
         }
 
+        /// <summary>
+        /// Handle the behavior associated with the TimeUtil ticking
+        /// </summary>
         private void HandleTick()
         {
             data.RegenMana();
@@ -148,6 +177,11 @@ namespace Prototype
             StartCoroutine(StatusEffectUpdate());
         }
 
+        /// <summary>
+        /// Handling status effects can take a second and impact performance. There's no need for all
+        /// of them to happen in the same single frame
+        /// </summary>
+        /// <returns></returns>
         IEnumerator StatusEffectUpdate()
         {
             // List of indeces of expired status effects to clean up
@@ -168,7 +202,6 @@ namespace Prototype
             for (int i = cleanUp.Count - 1; i >= 0; i--)
             {
                 activeStatusEffects.RemoveAt(cleanUp[i]);
-                yield return null;
             }
         }
 
@@ -177,17 +210,33 @@ namespace Prototype
          Ability Management
         */
 
+        /// <summary>
+        /// Stage an ability to be executed
+        /// </summary>
+        /// <param name="value">The index that indicates which ability to ready</param>
         private void ReadyAbility(int value)
         {
             readiedAbility = AbilityFactory.MakeAbility(abilities[value]);
         }
         
-        private void ReadyTarget(int value)
+        /// <summary>
+        /// Set the target for this ability
+        /// </summary>
+        /// <param name="value">The index of the target to ready</param>
+        protected virtual void ReadyTarget(int value)
         {
             SingleTargetAbility sta = (SingleTargetAbility) readiedAbility;
+
+            // Currently this method is hard-coded. But, extending this class with an Enemy class can help change this without
+            // needed a bunch of if-statements
             sta.SetTarget(ServiceLocator.Instance.GetService<AIDirectorService>().GetFriendlyCharacterByIndex(value));
         }
 
+
+        /// <summary>
+        /// Do something with the ready ability
+        /// </summary>
+        /// <param name="trigger">Execute or cancel. True is execute.</param>
         private void UseAbility(bool trigger)
         {
             if (trigger)
@@ -199,6 +248,8 @@ namespace Prototype
                 {
                     EmitAbilityAvailabilityChangedEvent();   
                 }
+
+                // Ability Execution
                 eventManager.BroadcastCharacterEvent(new CharacterEvent<AudioClip>(CharacterEventTypes.PlayAudio, readiedAbility.GetSoundClip()));
                 readiedAbility.Execute();
                 readiedAbility.Resolve();
@@ -209,10 +260,15 @@ namespace Prototype
 
             if (readiedAbility == null) return;
 
+            // Else cancel all of this
             readiedAbility.Cancel();
             readiedAbility = null;
         }
 
+        /// <summary>
+        /// Emit a message indicating how abilities may have changed. 
+        /// The emited event holds an array of booleans that say which abilities are available.
+        /// </summary>
         private void EmitAbilityAvailabilityChangedEvent()
         {
             bool[] abilityAvailability = new bool[CombatConstants.MaxAbilities];
