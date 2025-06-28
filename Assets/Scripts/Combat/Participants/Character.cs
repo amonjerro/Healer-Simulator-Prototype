@@ -172,12 +172,14 @@ namespace Prototype
         {
             if (trigger)
             {
+                // Process costs
                 int cost = readiedAbility.GetCost();
                 if (cost > 0) {
                     eventManager.BroadcastStatusChange(MakeAbilityAvailabilityChangedEvent());
                 }
                 data.CurrentMana -= readiedAbility.GetCost();
 
+                eventManager.BroadcastCharacterEvent(new CharacterEvent<AudioClip>(CharacterEventTypes.PlayAudio, readiedAbility.GetSoundClip()));
                 readiedAbility.Execute();
                 UpdateUI();
                 return;

@@ -38,6 +38,7 @@ namespace Prototype
         public string abilityName;
         public int power;
         public int cost;
+        public AudioClip audioClip;
     }
 
     public abstract class Ability
@@ -89,6 +90,11 @@ namespace Prototype
         public int GetCost()
         {
             return abilityInformation.cost;
+        }
+
+        public AudioClip GetSoundClip()
+        {
+            return abilityInformation.audioClip;
         }
 
         protected void ApplyAbility(CharacterData data)

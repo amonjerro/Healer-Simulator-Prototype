@@ -22,6 +22,7 @@ MonoBehaviour:
     abilityName: Heal
     power: 1
     cost: 20
+    audioClip: {fileID: 8300000, guid: 478c7e60b7c9b124482d6ecd95791104, type: 3}
   statusEffectData: {fileID: 0}
   effectData:
     healthFactor: 1

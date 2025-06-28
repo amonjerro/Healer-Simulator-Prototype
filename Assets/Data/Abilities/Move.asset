@@ -22,6 +22,7 @@ MonoBehaviour:
     abilityName: Move
     power: 10
     cost: 0
+    audioClip: {fileID: 0}
   statusEffectData: {fileID: 0}
   effectData:
     healthFactor: 0

@@ -8,6 +8,7 @@ namespace Prototype
         SetSkillTarget,
         SkillReady,
         SkillUse,
+        PlayAudio,
 
         // Status Enums
         AbilityAvailabilityChange,
