@@ -1,7 +1,6 @@
 using Prototype.UI;
+using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using Unity.VisualScripting;
 using UnityEngine;
 namespace Prototype
 {
@@ -36,6 +35,8 @@ namespace Prototype
             eventManager = GetComponent<CharacterEventManager>();
             eventManager.onCharacterEvent += ProcessEvents;
             movementRef.SetMovementVelocity(_characterDataAsset.MoveSpeed);
+
+            TimeUtil.onTick += HandleTick;
         }
 
         private void Start()
@@ -46,29 +47,13 @@ namespace Prototype
         // Update is called once per frame
         void Update()
         {
-            // List of indeces of expired status effects to clean up
-            List<int> cleanUp = new List<int>();
             
-            // Iterate through current status effects to either apply them or mark them as expired;
-            for(int i = 0; i < activeStatusEffects.Count; i++)
-            {
-                activeStatusEffects[i].Update(data);
-                if (!activeStatusEffects[i].IsActive)
-                {
-                    cleanUp.Add(i);
-                }
-            }
-
-            // Perform cleanup
-            for (int i = cleanUp.Count -1; i >= 0; i--)
-            {
-                activeStatusEffects.RemoveAt(cleanUp[i]);
-            }
         }
 
         private void OnDestroy()
         {
             eventManager.onCharacterEvent -= ProcessEvents;
+            TimeUtil.onTick -= HandleTick;
         }
 
         /// <summary>
@@ -152,6 +137,38 @@ namespace Prototype
                     return;
                 default:
                     return;
+            }
+        }
+
+        private void HandleTick()
+        {
+            data.RegenMana();
+            UpdateUI();
+            eventManager.BroadcastStatusChange(MakeAbilityAvailabilityChangedEvent());
+            StartCoroutine(StatusEffectUpdate());
+        }
+
+        IEnumerator StatusEffectUpdate()
+        {
+            // List of indeces of expired status effects to clean up
+            List<int> cleanUp = new List<int>();
+
+            // Iterate through current status effects to either apply them or mark them as expired;
+            for (int i = 0; i < activeStatusEffects.Count; i++)
+            {
+                activeStatusEffects[i].Update(data);
+                if (!activeStatusEffects[i].IsActive)
+                {
+                    cleanUp.Add(i);
+                }
+                yield return null;
+            }
+
+            // Perform cleanup
+            for (int i = cleanUp.Count - 1; i >= 0; i--)
+            {
+                activeStatusEffects.RemoveAt(cleanUp[i]);
+                yield return null;
             }
         }
 

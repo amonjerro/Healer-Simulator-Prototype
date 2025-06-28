@@ -38,6 +38,7 @@ namespace Prototype
         private void Update()
         {
             TimeUtil.UpdateDeltaTime();
+            TimeUtil.UpdateTick();
         }
 
         private void CreateStatsUI(Character c)

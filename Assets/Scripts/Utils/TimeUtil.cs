@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -7,6 +8,11 @@ using UnityEngine;
 /// </summary>
 public static class TimeUtil
 {
+    //Ticking
+    public const float TickLength = 1;
+    public static Action onTick;
+    private static float _elapsedSinceLastTick = 0.0f;
+
     private static float previousTime;
     public static float deltaTime;
     public static float timeScale;
@@ -28,8 +34,19 @@ public static class TimeUtil
     {
         deltaTime = Time.time - previousTime;
         previousTime = Time.time;
+
+        
     }
 
+    public static void UpdateTick()
+    {
+        _elapsedSinceLastTick += GetDelta();
+        if (_elapsedSinceLastTick > TickLength)
+        {
+            Tick();
+            _elapsedSinceLastTick = 0.0f;
+        }
+    }
     /// <summary>
     /// Acts as Unity's Time.deltaTime;
     /// </summary>
@@ -39,4 +56,11 @@ public static class TimeUtil
 
         return deltaTime * timeScale;
     }
+
+    private static void Tick()
+    {
+        onTick?.Invoke();
+    }
+
+
 }

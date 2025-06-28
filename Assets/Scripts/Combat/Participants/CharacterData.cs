@@ -17,7 +17,7 @@ namespace Prototype
         public int maxHealth;
         public int maxMana;
         private int _currentMana;
-        private int _manaRegen;
+        private int _manaRegen = 2;
         private int _currentHealth;
         private int _currentStubborness;
         private int _currentConfidence;

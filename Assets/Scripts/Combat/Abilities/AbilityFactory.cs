@@ -1,8 +1,18 @@
 namespace Prototype
 {
+    /// <summary>
+    /// Builder pattern class to build Ability objects from its saved data
+    /// </summary>
     internal class AbilityBuilder
     {
         public Ability Ability { get; set; }
+        
+        /// <summary>
+        /// Uses an ability's specification information to compute its effect. 
+        /// Does not take caster into account.
+        /// </summary>
+        /// <param name="dataObject">The data specs of this ability</param>
+        /// <returns>The builder, to allow for build chaining</returns>
         public AbilityBuilder ComputeEffectData(AbilityDataObject dataObject)
         {
             AbilityEffectData computedData = new AbilityEffectData();
@@ -13,6 +23,12 @@ namespace Prototype
             return this;
         }
 
+
+        /// <summary>
+        /// Adds status effect information to the built ability
+        /// </summary>
+        /// <param name="dataObject">The data specs of this ability</param>
+        /// <returns>The builder, to allow for build chanining</returns>
         public AbilityBuilder AddStatusEffectData(AbilityDataObject dataObject)
         {
             if (dataObject.appliesStatus)
@@ -22,6 +38,11 @@ namespace Prototype
             return this;
         }
 
+        /// <summary>
+        /// Adds the ability information to the built Ability object
+        /// </summary>
+        /// <param name="dataObject">The data specs of this ability</param>
+        /// <returns>The builder, to allow for build chanining</returns>
         public AbilityBuilder AddInformation(AbilityDataObject dataObject)
         {
             Ability.SetInformation(dataObject.abilityInformation);
@@ -30,6 +51,9 @@ namespace Prototype
 
     }
 
+    /// <summary>
+    /// Factory pattern object that leverages the builder to return Ability objects
+    /// </summary>
     internal static class AbilityFactory
     {
         public static Ability MakeAbility(AbilityDataObject dataObject)
