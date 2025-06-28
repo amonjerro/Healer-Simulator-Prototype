@@ -12,16 +12,16 @@ namespace Prototype
     {
 
         [SerializeField]
+        [Tooltip("Is this AI friendly or hostile?")]
         ActorAttitude CharacterAttitude;
+
+        [SerializeField]
+        [Tooltip("Debugging for the state machine. Changing this in runtime does nothing.")]
+        CharacterStates activeState;
 
         StateMachine<CharacterStates> stateMachine;
         CharacterEventManager eventManager;
-
         AIDirectorService directorRef;
-
-        [SerializeField]
-        CharacterStates activeState;
-
 
         private void Start()
         {
@@ -33,6 +33,10 @@ namespace Prototype
             SetupStateMachine();
         }
 
+        /// <summary>
+        /// Sets up the state machine for an AI controller. Part of initialization.
+        /// Internals will be expanded as the AI becomes more complex.
+        /// </summary>
         protected void SetupStateMachine()
         {
             WanderState wanderState = new WanderState(stateMachine, this);
@@ -50,11 +54,19 @@ namespace Prototype
             activeState = stateMachine.GetCurrentState();
         }
 
+        /// <summary>
+        /// Determines a wander destination point. This might be moved to a more complex AI Strategy pattern down the line
+        /// </summary>
+        /// <returns>The x position to wander towards</returns>
         public float GetWanderDestination()
         {
             return directorRef.GetPlayerPosition() + Random.Range(-1.0f, 1.0f);
         }
 
+        /// <summary>
+        /// Tells the AI in which direction to move.
+        /// </summary>
+        /// <param name="direction">Negative values represent left.</param>
         public void MoveInDirection(float direction) {
             CharacterEvent ce = new CharacterEvent<float>(CharacterEventTypes.Movement, direction);
             eventManager.BroadcastCharacterEvent(ce);

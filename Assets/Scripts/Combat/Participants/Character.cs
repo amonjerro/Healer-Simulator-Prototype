@@ -41,7 +41,7 @@ namespace Prototype
 
         private void Start()
         {
-            eventManager.BroadcastStatusChange(MakeAbilityAvailabilityChangedEvent());
+            EmitAbilityAvailabilityChangedEvent();
         }
 
         // Update is called once per frame
@@ -144,7 +144,7 @@ namespace Prototype
         {
             data.RegenMana();
             UpdateUI();
-            eventManager.BroadcastStatusChange(MakeAbilityAvailabilityChangedEvent());
+            EmitAbilityAvailabilityChangedEvent();
             StartCoroutine(StatusEffectUpdate());
         }
 
@@ -197,7 +197,7 @@ namespace Prototype
                 data.CurrentMana -= readiedAbility.GetCost();
                 if (cost > 0)
                 {
-                    eventManager.BroadcastStatusChange(MakeAbilityAvailabilityChangedEvent());
+                    EmitAbilityAvailabilityChangedEvent();   
                 }
                 eventManager.BroadcastCharacterEvent(new CharacterEvent<AudioClip>(CharacterEventTypes.PlayAudio, readiedAbility.GetSoundClip()));
                 readiedAbility.Execute();
@@ -213,7 +213,7 @@ namespace Prototype
             readiedAbility = null;
         }
 
-        private CharacterEvent MakeAbilityAvailabilityChangedEvent()
+        private void EmitAbilityAvailabilityChangedEvent()
         {
             bool[] abilityAvailability = new bool[CombatConstants.MaxAbilities];
             for (int i = 0; i < CombatConstants.MaxAbilities; i++) { 
@@ -227,8 +227,9 @@ namespace Prototype
                     abilityAvailability[i] = true;
                 }
             }
-
-            return new CharacterEvent<bool[]>(CharacterEventTypes.AbilityAvailabilityChange, abilityAvailability);
+            CharacterEvent<bool[]> ev = new CharacterEvent<bool[]>(CharacterEventTypes.AbilityAvailabilityChange, abilityAvailability);
+            eventManager.BroadcastStatusChange(ev);
+            
         }
     }
 }
