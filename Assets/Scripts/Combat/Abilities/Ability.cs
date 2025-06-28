@@ -46,9 +46,6 @@ namespace Prototype
         protected AbilityInformation abilityInformation;
         protected AbilityEffectData abilityData;
         protected StatusEffect statusEffect;
-
-        protected abstract void WillExecute();
-
         protected abstract void AfterExecute();
         protected abstract void OnExecute();
         protected abstract void OnCancel();
@@ -61,11 +58,6 @@ namespace Prototype
         public void Resolve()
         {
             AfterExecute();
-        }
-
-        public void Prepare()
-        {
-            WillExecute();
         }
 
         public void Cancel()
@@ -113,10 +105,6 @@ namespace Prototype
     public class SingleTargetAbility : Ability
     {
         Character target;
-        protected override void WillExecute()
-        {
-            
-        }
 
         protected override void OnCancel()
         {
