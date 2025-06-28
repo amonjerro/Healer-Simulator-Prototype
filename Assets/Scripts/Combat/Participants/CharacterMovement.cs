@@ -14,6 +14,9 @@ namespace Prototype
         float activeMoveVelocity;
         Transform parentObject;
 
+        /*
+            Unity lifecycle 
+        */
         private void Start()
         {
             parentObject = transform.parent;
@@ -30,6 +33,10 @@ namespace Prototype
                 parentObject.transform.position.z);
         }
 
+        /// <summary>
+        /// Receive and manage character events
+        /// </summary>
+        /// <param name="ev">The event received</param>
         private void HandleCharacterEvent(CharacterEvent ev)
         {
             if (ev.eventType != CharacterEventTypes.Movement)
@@ -49,6 +56,10 @@ namespace Prototype
             directionX = direction;
         }
 
+        /// <summary>
+        /// Sets the movement velocity for this character
+        /// </summary>
+        /// <param name="velocity"></param>
         public void SetMovementVelocity(float velocity) { 
             moveVelocity = velocity;
         }

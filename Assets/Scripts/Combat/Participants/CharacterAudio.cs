@@ -2,6 +2,10 @@ using UnityEngine;
 
 namespace Prototype
 {
+
+    /// <summary>
+    /// Component that controls all aspects of sound management in a character
+    /// </summary>
     [RequireComponent (typeof(AudioSource))]
     public class CharacterAudio : MonoBehaviour
     {
@@ -13,6 +17,10 @@ namespace Prototype
             audioComponent = GetComponent<AudioSource>();
         }
 
+        /// <summary>
+        /// Manages the events communicated down to evaluate when to play audio
+        /// </summary>
+        /// <param name="ev"></param>
         private void ProcessAudioEvent(CharacterEvent ev)
         {
             if (ev.eventType != CharacterEventTypes.PlayAudio) return;
@@ -20,6 +28,10 @@ namespace Prototype
             HandlePlayEvent(ev.EventValue as AudioClip);
         }
 
+        /// <summary>
+        /// Handles a play audio event
+        /// </summary>
+        /// <param name="clip">Takes an audio clip to play</param>
         private void HandlePlayEvent(AudioClip clip)
         {
             if (clip == null) return;

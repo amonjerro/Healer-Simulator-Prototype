@@ -1,6 +1,5 @@
 namespace Prototype
 {
-
     public enum CharacterEventTypes
     {
         // Input Enums
@@ -16,6 +15,10 @@ namespace Prototype
         Death
     }
 
+    /// <summary>
+    /// Absrtact character event message wrapper. 
+    /// This exists to allow classes to receive any type of character event
+    /// </summary>
     public abstract class CharacterEvent
     {
         public CharacterEventTypes eventType { get; private set; }
@@ -27,6 +30,11 @@ namespace Prototype
         }
     }
 
+    /// <summary>
+    /// Generic type character event message wrapper.
+    /// This exists to allow classes to emit any type of character event
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class CharacterEvent<T> : CharacterEvent
     {
         public T Value {  get; set; }

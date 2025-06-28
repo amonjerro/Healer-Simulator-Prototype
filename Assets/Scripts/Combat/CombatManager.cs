@@ -1,4 +1,5 @@
-﻿using Prototype.UI;
+﻿using NUnit.Framework;
+using Prototype.UI;
 using System;
 using UnityEngine;
 
@@ -11,16 +12,21 @@ namespace Prototype
     public class CombatManager : MonoBehaviour
     {
 
-
         [SerializeField]
+        [Tooltip("The game object that contains where the party's stats are going to show")]
         GameObject StatsContainer;
 
         [SerializeField]
+        [Tooltip("The prefab object for a set of party member UI elements")]
         GameObject MemberStatsPrefab;
 
         [SerializeField]
+        [Tooltip("The prefabs for the party")]
         GameObject[] Party;
-
+        
+        /*
+         Unity lifecycle
+         */
         private void Awake()
         {
             TimeUtil.Initialize();
@@ -41,6 +47,10 @@ namespace Prototype
             TimeUtil.UpdateTick();
         }
 
+        /// <summary>
+        /// Create an instance of a party member's UI elements
+        /// </summary>
+        /// <param name="c"></param>
         private void CreateStatsUI(Character c)
         {
             // Create the stats UI and add it to the container
@@ -51,6 +61,10 @@ namespace Prototype
             c.SetStatsUI(instantiatedMemberStats.GetComponent<MemberStats>());
         }
 
+        /// <summary>
+        /// Handle messages from other services
+        /// </summary>
+        /// <param name="message">The message received</param>
         private void HandleServiceMessage(ServiceMessage message)
         {
             if (message.Type == ServiceMessageTypes.ActorRegistered)

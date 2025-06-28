@@ -43,7 +43,7 @@ namespace Prototype
                     ProcessMove((float)e.EventValue);
                     break;
                 case CharacterEventTypes.DamageTaken:
-                    ProcessDamageTaken((int)e.EventValue);
+                    ProcessHealthChanged((int)e.EventValue);
                     break;
                 default:
                     return;
@@ -70,7 +70,11 @@ namespace Prototype
             }
         }
 
-        private void ProcessDamageTaken(int value)
+        /// <summary>
+        /// Show to the player that this character's health has changed in some capacity
+        /// </summary>
+        /// <param name="value">The value delta</param>
+        private void ProcessHealthChanged(int value)
         {
             GameObject text = Instantiate(floatingText, transform);
             TextMesh textMesh = text.GetComponent<TextMesh>();
@@ -81,6 +85,10 @@ namespace Prototype
             }
         }
 
+        /// <summary>
+        /// Get this characters' sprite
+        /// </summary>
+        /// <returns>The sprite</returns>
         public Sprite GetSprite()
         {
             return spriteRenderer.sprite;
