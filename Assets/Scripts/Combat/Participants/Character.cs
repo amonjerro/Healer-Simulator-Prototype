@@ -75,6 +75,11 @@ namespace Prototype
             return data;
         }
 
+        public bool IsAlive()
+        {
+            return data.CurrentHealth > 0;
+        }
+
         /// <summary>
         /// Add a status effect to this character
         /// </summary>
@@ -159,7 +164,7 @@ namespace Prototype
                     UseAbility((bool)ev.EventValue);
                     return;
                 case CharacterEventTypes.SetSkillTarget:
-                    ReadyTarget((int) ev.EventValue);
+                    ReadyTarget(ev.EventValue as Character);
                     return;
                 default:
                     return;
@@ -222,14 +227,11 @@ namespace Prototype
         /// <summary>
         /// Set the target for this ability
         /// </summary>
-        /// <param name="value">The index of the target to ready</param>
-        protected virtual void ReadyTarget(int value)
+        /// <param name="value">The character to target</param>
+        protected virtual void ReadyTarget(Character value)
         {
             SingleTargetAbility sta = (SingleTargetAbility) readiedAbility;
-
-            // Currently this method is hard-coded. But, extending this class with an Enemy class can help change this without
-            // needed a bunch of if-statements
-            sta.SetTarget(ServiceLocator.Instance.GetService<AIDirectorService>().GetFriendlyCharacterByIndex(value));
+            sta.SetTarget(value);
         }
 
 

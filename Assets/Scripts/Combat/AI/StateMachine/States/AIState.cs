@@ -15,6 +15,5 @@ namespace Prototype.StateMachine
             this.controller = controller;
         }
 
-        
     }
 }

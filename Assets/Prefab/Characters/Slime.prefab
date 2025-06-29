@@ -408,6 +408,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5734433230665669350, guid: 142fbc88fcc68f24db96fb132b3f96bd, type: 3}
+      propertyPath: aiStrategy
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734433230665669350, guid: 142fbc88fcc68f24db96fb132b3f96bd, type: 3}
       propertyPath: CharacterAttitude
       value: 0
       objectReference: {fileID: 0}

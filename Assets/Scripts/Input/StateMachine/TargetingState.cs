@@ -1,4 +1,5 @@
 using static UnityEngine.GraphicsBuffer;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Prototype.StateMachine
 {
@@ -32,7 +33,8 @@ namespace Prototype.StateMachine
             // Set the ability target
             if (IsTargetingInput(inputKey))
             {
-                CharacterEvent ev = new CharacterEvent<int>(CharacterEventTypes.SetSkillTarget, (int)inputKey);
+                Character c = ServiceLocator.Instance.GetService<AIDirectorService>().GetFriendlyCharacterByIndex((int)inputKey);
+                CharacterEvent ev = new CharacterEvent<Character>(CharacterEventTypes.SetSkillTarget, c);
                 handler.PublishMessage(ev);
             }
             Flush();

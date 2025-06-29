@@ -451,6 +451,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5734433230665669350, guid: 142fbc88fcc68f24db96fb132b3f96bd, type: 3}
+      propertyPath: aiStrategy
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8937519401420434321, guid: 142fbc88fcc68f24db96fb132b3f96bd, type: 3}
       propertyPath: m_Name
       value: AI Controller

@@ -10,6 +10,7 @@ namespace Prototype.StateMachine
     {
         Idle,
         Wandering,
+        FindTarget,
         Seeking,
         Attacking,
         Fleeing

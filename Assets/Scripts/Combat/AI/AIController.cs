@@ -19,9 +19,15 @@ namespace Prototype
         [Tooltip("Debugging for the state machine. Changing this in runtime does nothing.")]
         CharacterStates activeState;
 
+        [SerializeField]
+        [Tooltip("The type of AI this is")]
+        StrategyTypes aiStrategy;
+
         StateMachine<CharacterStates> stateMachine;
         CharacterEventManager eventManager;
         AIDirectorService directorRef;
+        AbsAIStrategy strategy;
+        Character targetRef;
 
         private void Start()
         {
@@ -30,22 +36,17 @@ namespace Prototype
             directorRef = ServiceLocator.Instance.GetService<AIDirectorService>();
             directorRef.RegisterActor(CharacterAttitude, character);
             stateMachine = new StateMachine<CharacterStates>();
+            strategy = AIStrategyFactory.MakeStrategy(aiStrategy);
             SetupStateMachine();
         }
 
         /// <summary>
         /// Sets up the state machine for an AI controller. Part of initialization.
-        /// Internals will be expanded as the AI becomes more complex.
+        /// Internals delegated to AI strategy
         /// </summary>
         protected void SetupStateMachine()
         {
-            WanderState wanderState = new WanderState(stateMachine, this);
-            IdleState idleState = new IdleState(stateMachine, this);
-
-            wanderState.transitions[CharacterStates.Idle].TargetState = idleState;
-            idleState.transitions[CharacterStates.Wandering].TargetState = wanderState;
-
-            stateMachine.SetStartingState(idleState);
+            strategy.SetupAIStateMachine(stateMachine, this);
         }
 
         private void Update()
@@ -70,6 +71,26 @@ namespace Prototype
         public void MoveInDirection(float direction) {
             CharacterEvent ce = new CharacterEvent<float>(CharacterEventTypes.Movement, direction);
             eventManager.BroadcastCharacterEvent(ce);
+        }
+
+        public void PublishMessage(CharacterEvent ev)
+        {
+            eventManager.BroadcastCharacterEvent(ev);
+        }
+
+        public ActorAttitude GetAttitude()
+        {
+            return CharacterAttitude;
+        }
+
+        public void SetTarget(Character c)
+        {
+            targetRef = c;
+        }
+        
+        public Character GetTarget()
+        {
+            return targetRef;
         }
     }
 }
