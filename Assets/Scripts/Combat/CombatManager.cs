@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Prototype.UI;
 using System;
+using TMPro;
 using UnityEngine;
 
 namespace Prototype
@@ -27,6 +28,9 @@ namespace Prototype
         [SerializeField]
         [Tooltip("The prefabs for the party")]
         GameObject[] Party;
+
+        [SerializeField]
+        TextMeshProUGUI combatOverText;
         
         /*
          Unity lifecycle
@@ -79,6 +83,12 @@ namespace Prototype
                 case ServiceMessageTypes.PlayerRegistered:
                     AssignPowersUI(message.MessageValue as Character);
                     return;
+                case ServiceMessageTypes.GameWin:
+                    UpdateCombatOverText("You win!");
+                    return;
+                case ServiceMessageTypes.GameLose:
+                    UpdateCombatOverText("You lose!");
+                    return;
                 default:
                     return;
             }
@@ -87,6 +97,11 @@ namespace Prototype
         private void AssignPowersUI(Character c)
         {
             c.SetPowersContainer(PowerContainer);
+        }
+
+        public void UpdateCombatOverText(string text)
+        {
+            combatOverText.text = text;
         }
     }
 }

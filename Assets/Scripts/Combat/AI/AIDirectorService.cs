@@ -20,6 +20,9 @@ namespace Prototype
         [Tooltip("The x-axis bounds of the game space")]
         float maxX;
 
+        [SerializeField]
+        Spawner spawner;
+
         private void Awake()
         {
             hostileAIs = new List<Character>();
@@ -56,6 +59,11 @@ namespace Prototype
             {
                 hostileAIs.Remove(controller);
             }
+
+            if(hostileAIs.Count == 0 && spawner.IsSpent)
+            {
+                EmitGameWinEvent();
+            }
         }
 
         /// <summary>
@@ -70,6 +78,12 @@ namespace Prototype
         private void EmitPlayerRegistered(Character c)
         {
             ServiceMessage<Character> serviceMessage = new ServiceMessage<Character>(c, ServiceMessageTypes.PlayerRegistered);
+            ServiceLocator.serviceAction?.Invoke(serviceMessage);
+        }
+
+        private void EmitGameWinEvent()
+        {
+            ServiceMessage<bool> serviceMessage = new ServiceMessage<bool>(true, ServiceMessageTypes.GameWin);
             ServiceLocator.serviceAction?.Invoke(serviceMessage);
         }
 

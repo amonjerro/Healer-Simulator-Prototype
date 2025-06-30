@@ -35,7 +35,7 @@ namespace Prototype
         private void Start()
         {
             eventManager = GetComponentInParent<CharacterEventManager>();
-            eventManager.onCharacterEvent += ProcessEvents;
+            eventManager.onStatusChange += ProcessEvents;
             Character character = GetComponentInParent<Character>();
             directorRef = ServiceLocator.Instance.GetService<AIDirectorService>();
             directorRef.RegisterActor(CharacterAttitude, character);
@@ -47,7 +47,7 @@ namespace Prototype
 
         private void OnDestroy()
         {
-            eventManager.onCharacterEvent -= ProcessEvents;
+            eventManager.onStatusChange -= ProcessEvents;
         }
 
         /// <summary>

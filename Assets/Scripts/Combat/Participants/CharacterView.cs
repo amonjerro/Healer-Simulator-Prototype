@@ -31,6 +31,7 @@ namespace Prototype
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
             GetComponentInParent<CharacterEventManager>().onCharacterEvent += ProcessEvent;
+            GetComponentInParent<CharacterEventManager>().onStatusChange += ProcessEvent;
 
         }
         

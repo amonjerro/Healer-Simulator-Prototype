@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal.Builders;
 using Prototype.StateMachine;
 using UnityEngine;
 
@@ -96,6 +97,10 @@ namespace Prototype
             {
                 case CharacterEventTypes.AbilityAvailabilityChange:
                     abilityAvailability = ev.EventValue as bool[];
+                    return;
+                case CharacterEventTypes.Death:
+                    ServiceMessage serviceMessage = new ServiceMessage<bool>(true, ServiceMessageTypes.GameLose);
+                    ServiceLocator.serviceAction?.Invoke(serviceMessage);
                     return;
                 default:
                     return;

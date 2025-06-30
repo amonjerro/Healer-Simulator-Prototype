@@ -1,7 +1,6 @@
 using Prototype.UI;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection.Emit;
 using UnityEngine;
 namespace Prototype
 {
@@ -108,7 +107,7 @@ namespace Prototype
             } else
             {
                 CharacterEvent<int> deathEvent = new CharacterEvent<int>(CharacterEventTypes.Death, value);
-                eventManager.BroadcastCharacterEvent(deathEvent);
+                eventManager.BroadcastStatusChange(deathEvent);
                 gameObject.layer = LayerMask.NameToLayer("Dead");
             }
             UpdateUI();
