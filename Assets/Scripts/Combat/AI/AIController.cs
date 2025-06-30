@@ -1,6 +1,7 @@
 using UnityEngine;
 using Prototype.StateMachine;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Prototype
 {
@@ -34,6 +35,7 @@ namespace Prototype
         private void Start()
         {
             eventManager = GetComponentInParent<CharacterEventManager>();
+            eventManager.onCharacterEvent += ProcessEvents;
             Character character = GetComponentInParent<Character>();
             directorRef = ServiceLocator.Instance.GetService<AIDirectorService>();
             directorRef.RegisterActor(CharacterAttitude, character);
@@ -41,6 +43,11 @@ namespace Prototype
             strategy = AIStrategyFactory.MakeStrategy(aiStrategy, this);
             oppositeMatch = new Dictionary<ActorAttitude, ActorAttitude>() { { ActorAttitude.Friendly, ActorAttitude.Hostile }, { ActorAttitude.Hostile, ActorAttitude.Friendly } };
             SetupStateMachine();
+        }
+
+        private void OnDestroy()
+        {
+            eventManager.onCharacterEvent -= ProcessEvents;
         }
 
         /// <summary>
@@ -111,6 +118,28 @@ namespace Prototype
         public void HandleDeath()
         {
             strategy.HandleDeath();
+        }
+
+        private void ProcessEvents(CharacterEvent ev)
+        {
+            switch (ev.eventType)
+            {
+                case CharacterEventTypes.Death:
+                    stateMachine.SetAsTerminal();
+                    return;
+                default:
+                    return;
+            }
+        }
+
+        public Character GetCharacter()
+        {
+            return GetComponentInParent<Character>();
+        }
+
+        public void CleanUp()
+        {
+            Destroy(gameObject.transform.parent.gameObject, 2.0f);
         }
     }
 }

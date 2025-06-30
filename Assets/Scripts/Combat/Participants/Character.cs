@@ -95,9 +95,17 @@ namespace Prototype
         /// <param name="value">The value of the effect</param>
         public void ResolveCombatEffect(int value)
         {
-            CharacterEvent<int> combatEffectEvent = new CharacterEvent<int>(CharacterEventTypes.DamageTaken, value);
-            eventManager.BroadcastCharacterEvent(combatEffectEvent);
-
+            if (IsAlive())
+            {
+                CharacterEvent<int> combatEffectEvent = new CharacterEvent<int>(CharacterEventTypes.DamageTaken, value);
+                eventManager.BroadcastCharacterEvent(combatEffectEvent);
+            } else
+            {
+                Debug.Log("Dead!");
+                CharacterEvent<int> deathEvent = new CharacterEvent<int>(CharacterEventTypes.Death, value);
+                eventManager.BroadcastCharacterEvent(deathEvent);
+                gameObject.layer = LayerMask.NameToLayer("Dead");
+            }
             UpdateUI();
         }
 
@@ -259,7 +267,7 @@ namespace Prototype
                 eventManager.BroadcastCharacterEvent(new CharacterEvent<AudioClip>(CharacterEventTypes.PlayAudio, readiedAbility.GetSoundClip()));
                 readiedAbility.Execute();
                 readiedAbility.Resolve();
-                // Feedback
+
                 UpdateUI();
                 return;
             }

@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Prototype
 {
@@ -46,6 +47,9 @@ namespace Prototype
                 case CharacterEventTypes.DamageTaken:
                     ProcessHealthChanged((int)e.EventValue);
                     break;
+                case CharacterEventTypes.Death:
+                    ProcessDeath((int)e.EventValue);
+                    break;
                 default:
                     return;
             }
@@ -77,21 +81,29 @@ namespace Prototype
         /// <param name="value">The value delta</param>
         private void ProcessHealthChanged(int value)
         {
+            ShowFloatingText(value);
+            if (value < 0)
+            {
+                animator.SetTrigger("DamageTaken");
+            }
+        }
+
+
+        private void ProcessDeath(int value)
+        {
+            ShowFloatingText(value);
+            animator.SetTrigger("tDie");
+        }
+
+        private void ShowFloatingText(int value)
+        {
             GameObject text = Instantiate(floatingText, transform);
             TextMesh textMesh = text.GetComponent<TextMesh>();
             textMesh.text = Mathf.Abs(value).ToString();
             if (value > 0)
             {
                 textMesh.color = Color.green;
-            } else if(value < 0)
-            {
-                animator.SetTrigger("DamageTaken");
             }
-        }
-
-        private void DamageAnimationOver()
-        {
-
         }
 
         /// <summary>

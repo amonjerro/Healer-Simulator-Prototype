@@ -15,6 +15,7 @@ namespace Prototype
             SeekingState seekingState = new SeekingState(machine, controller);
             AttackingState attackingState = new AttackingState(machine, controller);
             WanderState wanderingState = new WanderState(machine, controller);
+            DeathState deadState = new DeathState(machine, controller);
 
             // Transition wiring
             idleState.transitions[CharacterStates.Wandering].TargetState = wanderingState;
@@ -30,6 +31,7 @@ namespace Prototype
             attackingState.transitions[CharacterStates.Idle].TargetState = idleState;
 
             machine.SetStartingState(idleState);
+            machine.SetTerminalState(deadState);
             return machine;
         }
 
@@ -64,6 +66,9 @@ namespace Prototype
 
         public override void HandleDeath()
         {
+            AIDirectorService directorService = ServiceLocator.Instance.GetService<AIDirectorService>();
+            directorService.UnregisterActor(ActorAttitude.Hostile, owner.GetCharacter());
+            owner.CleanUp();
             
         }
     }

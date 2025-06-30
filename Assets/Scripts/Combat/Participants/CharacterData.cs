@@ -100,7 +100,7 @@ namespace Prototype
         /// </summary>
         public void Reset()
         {
-            _currentHealth = maxHealth /2;
+            _currentHealth = maxHealth;
             _currentMana = maxMana;
         }
 

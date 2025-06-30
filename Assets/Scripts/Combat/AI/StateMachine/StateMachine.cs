@@ -14,6 +14,7 @@ namespace Prototype.StateMachine
 
         AbsState<EState> _currentState;
         AbsState<EState> _startingState;
+        AbsState<EState> _terminalState;
         public AbsState<EState> CurrentState { get { return _currentState; } }
         public Stack<AbsState<EState>> stateStack;
 
@@ -49,6 +50,10 @@ namespace Prototype.StateMachine
             _currentState = state;
         }
 
+        public void SetTerminalState(AbsState<EState> state) { 
+            _terminalState = state;
+        }
+
         /// <summary>
         /// Gets the active state in this state machine
         /// </summary>
@@ -82,6 +87,13 @@ namespace Prototype.StateMachine
         public void RestoreInitialState()
         {
             _currentState = _startingState;
+        }
+
+        public void SetAsTerminal()
+        {
+            _currentState.Exit();
+            _currentState = _terminalState;
+            _currentState.Enter();
         }
     }
 }

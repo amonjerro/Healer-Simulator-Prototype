@@ -49,6 +49,10 @@ namespace Prototype
             }
         }
 
+        public void UnregisterActor(ActorAttitude attitude, Character controller) { 
+        
+        }
+
         /// <summary>
         /// Emit a message to other services stating an actor has been registered.
         /// </summary>
