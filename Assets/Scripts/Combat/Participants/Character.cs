@@ -97,6 +97,7 @@ namespace Prototype
         {
             CharacterEvent<int> combatEffectEvent = new CharacterEvent<int>(CharacterEventTypes.DamageTaken, value);
             eventManager.BroadcastCharacterEvent(combatEffectEvent);
+
             UpdateUI();
         }
 

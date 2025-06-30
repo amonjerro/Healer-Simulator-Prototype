@@ -13,7 +13,8 @@ namespace Prototype.StateMachine
         FindTarget,
         Seeking,
         Attacking,
-        Fleeing
+        Fleeing,
+        Dead
     }
 
     public enum AbilityStates

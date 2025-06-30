@@ -83,7 +83,15 @@ namespace Prototype
             if (value > 0)
             {
                 textMesh.color = Color.green;
+            } else if(value < 0)
+            {
+                animator.SetTrigger("DamageTaken");
             }
+        }
+
+        private void DamageAnimationOver()
+        {
+
         }
 
         /// <summary>
@@ -94,7 +102,5 @@ namespace Prototype
         {
             return spriteRenderer.sprite;
         }
-
-
     }
 }

@@ -29,7 +29,6 @@ namespace Prototype.StateMachine
             {
                 if (kvp.Value.IsTriggered())
                 {
-                    Debug.Log(kvp.Key);
                     _currentState.Exit();
                     _currentState = kvp.Value.TargetState;
                     _currentState.Enter();

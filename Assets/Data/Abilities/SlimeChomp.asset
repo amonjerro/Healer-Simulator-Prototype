@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a98a0741b392794788a5490ee5e21d7, type: 3}
-  m_Name: Attack
+  m_Name: SlimeChomp
   m_EditorClassIdentifier: 
-  icon: {fileID: -5618141903027225119, guid: f7afea0041bdf614a930d01349016b87, type: 3}
-  effectType: 1
+  icon: {fileID: 0}
+  effectType: 0
   abilityType: 0
   abilityTargetType: 0
   sideTargeted: 0
   appliesStatus: 0
   abilityInformation:
-    abilityName: Attack
-    power: 10
+    abilityName: SlimeChomp
+    power: 5
     cost: 0
-    audioClip: {fileID: 8300000, guid: fc9d8b0ee342a6140a433633fc0d223e, type: 3}
+    audioClip: {fileID: 8300000, guid: 5a1d5cfb23503354895f5b57570b4b8f, type: 3}
   statusEffectData: {fileID: 0}
   effectData:
     healthFactor: -1
-    confidenceFactor: -0.3
+    confidenceFactor: -0.5
     stubbornessFactor: 0
   animationDuration: 0

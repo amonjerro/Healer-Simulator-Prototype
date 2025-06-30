@@ -61,6 +61,11 @@ namespace Prototype
 
             return candidate;
         }
+
+        public override void HandleDeath()
+        {
+            
+        }
     }
 }
 

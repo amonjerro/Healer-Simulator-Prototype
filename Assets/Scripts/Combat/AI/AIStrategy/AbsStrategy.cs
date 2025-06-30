@@ -1,4 +1,5 @@
 using Prototype.StateMachine;
+using UnityEngine;
 
 namespace Prototype
 {
@@ -33,6 +34,8 @@ namespace Prototype
         /// <param name="actorAttitude"></param>
         /// <returns></returns>
         public abstract Character FindNextTarget(ActorAttitude actorAttitude);
+
+        public abstract void HandleDeath();
     }
 
     /// <summary>
@@ -54,6 +57,11 @@ namespace Prototype
         public override Character FindNextTarget(ActorAttitude actorAttitude)
         {
             return null;
+        }
+
+        public override void HandleDeath()
+        {
+            Debug.Log("I'm dead. X.X");
         }
     }
 

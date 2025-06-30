@@ -223,7 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterDataAsset: {fileID: 11400000, guid: 186d830309912c3499e7164db04414a2, type: 2}
   abilities:
-  - {fileID: 11400000, guid: fc644aaa38e06db4a9b67b5c7af55655, type: 2}
+  - {fileID: 11400000, guid: 7a113bd1eeb0a064fb956ebd0525e9c6, type: 2}
 --- !u!114 &3240555095244653109
 MonoBehaviour:
   m_ObjectHideFlags: 0

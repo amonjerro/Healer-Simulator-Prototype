@@ -107,5 +107,10 @@ namespace Prototype
             ActorAttitude searchTerm = same ? CharacterAttitude : oppositeMatch[CharacterAttitude];
             return ServiceLocator.Instance.GetService<AIDirectorService>().GetCharacterRoster(searchTerm).Count > 0;
         }
+
+        public void HandleDeath()
+        {
+            strategy.HandleDeath();
+        }
     }
 }

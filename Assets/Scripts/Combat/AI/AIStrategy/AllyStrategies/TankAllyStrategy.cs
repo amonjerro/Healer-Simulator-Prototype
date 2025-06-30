@@ -48,5 +48,10 @@ namespace Prototype
 
             return candidates[0];
         }
+
+        public override void HandleDeath()
+        {
+            
+        }
     }
 }
