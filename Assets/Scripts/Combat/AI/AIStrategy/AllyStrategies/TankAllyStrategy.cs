@@ -3,9 +3,14 @@ using Prototype.StateMachine;
 
 namespace Prototype
 {
+    /// <summary>
+    /// AI function execution strategy for the Tank Ally
+    /// </summary>
     public class TankAllyStrategy : AbsAIStrategy
     {
         public TankAllyStrategy(AIController c) : base(c) { }
+
+        
         public override StateMachine<CharacterStates> SetupAIStateMachine(StateMachine<CharacterStates> machine, AIController controller)
         {
             // State instantiation
@@ -28,6 +33,12 @@ namespace Prototype
             return machine;
         }
 
+        /// <summary>
+        /// Current implementation is for the tank to search for the first enemy that spawned.
+        /// This can be changed to protect the healer more.
+        /// </summary>
+        /// <param name="toGet">The side to get. For the tank it's mostly gonna be enemies</param>
+        /// <returns>The character to target</returns>
         public override Character FindNextTarget(ActorAttitude toGet)
         {
             AIDirectorService service = ServiceLocator.Instance.GetService<AIDirectorService>();

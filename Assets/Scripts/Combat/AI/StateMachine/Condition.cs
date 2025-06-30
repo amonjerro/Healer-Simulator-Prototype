@@ -156,6 +156,13 @@ namespace Prototype.StateMachine
     {
         protected Condition ConditionA;
         protected Condition ConditionB;
+        public AbsCompoundCondition(Condition conditionA, Condition conditionB)
+        {
+            ConditionA = conditionA;
+            ConditionB = conditionB;
+        }
+
+        
         public Condition GetConditionA()
         {
             return ConditionA;
@@ -180,10 +187,8 @@ namespace Prototype.StateMachine
     public class AndCondition : AbsCompoundCondition
     {
 
-        public AndCondition(Condition conditionA, Condition conditionB)
+        public AndCondition(Condition conditionA, Condition conditionB) : base(conditionA, conditionB) 
         {
-            ConditionA = conditionA;
-            ConditionB = conditionB;
             conditionType = ConditionType.And;
         }
 
@@ -201,7 +206,10 @@ namespace Prototype.StateMachine
     /// </summary>
     public class OrCondition : AbsCompoundCondition
     {
-
+        public OrCondition(Condition conditionA, Condition conditionB) : base(conditionA, conditionB)
+        {
+            conditionType = ConditionType.Or;
+        }
         public override bool Test()
         {
             return ConditionA.Test() || ConditionB.Test();

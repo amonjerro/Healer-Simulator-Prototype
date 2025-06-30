@@ -19,10 +19,25 @@ namespace Prototype
             this.owner = owner;
         }
 
+        /// <summary>
+        /// Set up the state machine for this character
+        /// </summary>
+        /// <param name="machine"></param>
+        /// <param name="controller"></param>
+        /// <returns></returns>
         public abstract StateMachine<CharacterStates> SetupAIStateMachine(StateMachine<CharacterStates> machine, AIController controller);
+
+        /// <summary>
+        /// Determine this character's next target
+        /// </summary>
+        /// <param name="actorAttitude"></param>
+        /// <returns></returns>
         public abstract Character FindNextTarget(ActorAttitude actorAttitude);
     }
 
+    /// <summary>
+    /// A very simple strategy that does nothing. Mostly for testing and debugging
+    /// </summary>
     public class IdleStrategy : AbsAIStrategy
     {
         public IdleStrategy(AIController c) : base(c) { }
@@ -31,6 +46,7 @@ namespace Prototype
         {
             IdleState idleState = new IdleState(machine, controller);
             idleState.transitions[CharacterStates.Wandering].TargetState = idleState;
+            idleState.transitions[CharacterStates.FindTarget].TargetState = idleState;
             machine.SetStartingState(idleState);
             return machine;
         }
@@ -41,6 +57,9 @@ namespace Prototype
         }
     }
 
+    /// <summary>
+    /// Static strategy constructor, handles the creation of specific strategies
+    /// </summary>
     public static class AIStrategyFactory
     {
         public static AbsAIStrategy MakeStrategy(StrategyTypes t, AIController c)

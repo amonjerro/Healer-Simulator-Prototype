@@ -18,18 +18,26 @@ namespace Prototype
 
             // Transition wiring
             idleState.transitions[CharacterStates.Wandering].TargetState = wanderingState;
-            wanderingState.transitions[CharacterStates.Idle].TargetState = idleState;
             idleState.transitions[CharacterStates.FindTarget].TargetState = targetState;
+
+            wanderingState.transitions[CharacterStates.Idle].TargetState = idleState;
+            
             targetState.transitions[CharacterStates.Seeking].TargetState = seekingState;
+            
             seekingState.transitions[CharacterStates.FindTarget].TargetState = targetState;
-            seekingState.transitions[CharacterStates.Attacking].TargetState= attackingState;
+            seekingState.transitions[CharacterStates.Attacking].TargetState = attackingState;
+
             attackingState.transitions[CharacterStates.Idle].TargetState = idleState;
 
             machine.SetStartingState(idleState);
             return machine;
         }
 
-        
+        /// <summary>
+        /// Finds the nearest enemy.
+        /// </summary>
+        /// <param name="toGet">Since the slime _is_ an enemy, it looks for candidates in the party roster</param>
+        /// <returns>The selected party member</returns>
         public override Character FindNextTarget(ActorAttitude toGet)
         {
             AIDirectorService service = ServiceLocator.Instance.GetService<AIDirectorService>();
