@@ -49,7 +49,6 @@ namespace Prototype
             List<Character> candidates = service.GetCharacterRoster(toGet);
             float maxX = service.GetBounds();
             Character[] validCandidates = candidates.Where((c) => Mathf.Abs(c.transform.position.x) < maxX).ToArray();
-            Debug.Log(validCandidates.Length);
             if (validCandidates.Length == 0) { return null; }
 
             return validCandidates[Random.Range(0, validCandidates.Length-1)];
