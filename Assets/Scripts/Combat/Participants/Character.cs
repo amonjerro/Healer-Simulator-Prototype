@@ -1,6 +1,7 @@
 using Prototype.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using UnityEngine;
 namespace Prototype
 {
@@ -22,8 +23,11 @@ namespace Prototype
         CharacterData data;
         List<StatusEffect> activeStatusEffects;
         MemberStats statsUI;
+        PowerContainer powerContainer;
         CharacterEventManager eventManager;
         Ability readiedAbility;
+
+        bool isPlayer;
         
         /*
          Unity Lifecycle hooks
@@ -38,6 +42,7 @@ namespace Prototype
             CharacterMovement movementRef = GetComponentInChildren<CharacterMovement>();
             eventManager = GetComponent<CharacterEventManager>();
             eventManager.onCharacterEvent += ProcessEvents;
+            CharacterEventManager.onUIRequest += ProcessUIRequest;
             movementRef.SetMovementVelocity(_characterDataAsset.MoveSpeed);
 
             TimeUtil.onTick += HandleTick;
@@ -59,6 +64,7 @@ namespace Prototype
         {
             // Unsuscribe from events
             eventManager.onCharacterEvent -= ProcessEvents;
+            CharacterEventManager.onUIRequest -= ProcessUIRequest;
             TimeUtil.onTick -= HandleTick;
         }
 
@@ -101,7 +107,6 @@ namespace Prototype
                 eventManager.BroadcastCharacterEvent(combatEffectEvent);
             } else
             {
-                Debug.Log("Dead!");
                 CharacterEvent<int> deathEvent = new CharacterEvent<int>(CharacterEventTypes.Death, value);
                 eventManager.BroadcastCharacterEvent(deathEvent);
                 gameObject.layer = LayerMask.NameToLayer("Dead");
@@ -133,6 +138,10 @@ namespace Prototype
             SetPortraitUI();
         }
 
+        public void SetPowersContainer(PowerContainer pc)
+        {
+            powerContainer = pc;
+        }
 
         /*
             Private methods 
@@ -178,6 +187,35 @@ namespace Prototype
                 case CharacterEventTypes.SetSkillTarget:
                     ReadyTarget(ev.EventValue as Character);
                     return;
+                default:
+                    return;
+            }
+        }
+
+        private void ProcessUIRequest(CharacterEvent ev)
+        {
+            switch (ev.eventType)
+            {
+                case CharacterEventTypes.UITargetRequest:
+                    if (statsUI != null)
+                    {
+                        statsUI.ShowInputButton();
+                    }
+                    if (powerContainer != null)
+                    {
+                        powerContainer.HideButtonImages();
+                    }
+                    break;
+                case CharacterEventTypes.UIAbilityRequest:
+                    if (statsUI != null)
+                    {
+                        statsUI.HideInputButton();
+                    }
+                    if (powerContainer != null)
+                    {
+                        powerContainer.ShowButtonImages();
+                    }
+                    break;
                 default:
                     return;
             }

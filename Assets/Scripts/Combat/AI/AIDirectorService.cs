@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 namespace Prototype
 {
@@ -42,6 +43,7 @@ namespace Prototype
                     playerCharacter = controller;
                     FriendlyCharacters.Add(controller);
                     EmitActorRegistered(playerCharacter);
+                    EmitPlayerRegistered(playerCharacter);
                     return;
                 default:
                     hostileAIs.Add(controller);
@@ -49,8 +51,11 @@ namespace Prototype
             }
         }
 
-        public void UnregisterActor(ActorAttitude attitude, Character controller) { 
-        
+        public void UnregisterEnemy(Character controller) { 
+            if (hostileAIs.Contains(controller))
+            {
+                hostileAIs.Remove(controller);
+            }
         }
 
         /// <summary>
@@ -59,6 +64,12 @@ namespace Prototype
         /// <param name="controller">Indicates the actor registered</param>
         private void EmitActorRegistered(Character controller) {
             ServiceMessage<Character> serviceMessage = new ServiceMessage<Character>(controller, ServiceMessageTypes.ActorRegistered);
+            ServiceLocator.serviceAction?.Invoke(serviceMessage);
+        }
+
+        private void EmitPlayerRegistered(Character c)
+        {
+            ServiceMessage<Character> serviceMessage = new ServiceMessage<Character>(c, ServiceMessageTypes.PlayerRegistered);
             ServiceLocator.serviceAction?.Invoke(serviceMessage);
         }
 

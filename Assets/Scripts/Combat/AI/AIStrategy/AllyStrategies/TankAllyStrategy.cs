@@ -1,6 +1,7 @@
 using System.Collections.Generic;
-using System.Xml;
+using UnityEngine;
 using Prototype.StateMachine;
+using System.Linq;
 
 namespace Prototype
 {
@@ -37,7 +38,7 @@ namespace Prototype
         }
 
         /// <summary>
-        /// Current implementation is for the tank to search for the first enemy that spawned.
+        /// Current implementation is for the tank to search for a random enemy that's within view
         /// This can be changed to protect the healer more.
         /// </summary>
         /// <param name="toGet">The side to get. For the tank it's mostly gonna be enemies</param>
@@ -46,10 +47,12 @@ namespace Prototype
         {
             AIDirectorService service = ServiceLocator.Instance.GetService<AIDirectorService>();
             List<Character> candidates = service.GetCharacterRoster(toGet);
+            float maxX = service.GetBounds();
+            Character[] validCandidates = candidates.Where((c) => Mathf.Abs(c.transform.position.x) < maxX).ToArray();
+            Debug.Log(validCandidates.Length);
+            if (validCandidates.Length == 0) { return null; }
 
-            if (candidates.Count == 0) { return null; }
-
-            return candidates[0];
+            return validCandidates[Random.Range(0, validCandidates.Length-1)];
         }
 
         public override void HandleDeath()

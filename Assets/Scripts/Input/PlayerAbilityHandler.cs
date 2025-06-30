@@ -80,6 +80,11 @@ namespace Prototype
             eventManager.BroadcastCharacterEvent(ev);
         }
 
+        public void PublishUIMessage(CharacterEvent ev)
+        {
+            eventManager.BroadcastUIEvent(ev);
+        }
+
         public bool CheckAbilityAvailability(int index)
         {
             return index >= abilityAvailability.Length ? false : abilityAvailability[index];

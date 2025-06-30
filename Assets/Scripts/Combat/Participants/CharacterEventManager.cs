@@ -14,6 +14,7 @@ namespace Prototype
         */
         public Action<CharacterEvent> onCharacterEvent;
         public Action<CharacterEvent> onStatusChange;
+        public static Action<CharacterEvent> onUIRequest;
 
         /*
          Broadcast functions
@@ -25,6 +26,10 @@ namespace Prototype
 
         public void BroadcastStatusChange(CharacterEvent characterEvent) { 
             onStatusChange?.Invoke(characterEvent);
+        }
+
+        public void BroadcastUIEvent(CharacterEvent characterEvent) { 
+            onUIRequest?.Invoke(characterEvent);
         }
     }
 }

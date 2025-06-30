@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,20 @@ namespace Prototype.UI
         [Tooltip("Image that shows which character's this stat set belongs to")]
         Image portrait;
 
+        [SerializeField]
+        Image buttonImage;
+
+        [SerializeField]
+        List<Sprite> buttonImages;
+
+        int _buttonIndex;
+        Color transparent = new Color(1, 1, 1, 0);
+
+        private void Start()
+        {
+            buttonImage.color = transparent;
+            buttonImage.sprite = buttonImages[transform.GetSiblingIndex()];
+        }
 
         public void SetPortrait(Sprite sprite)
         {
@@ -42,6 +57,15 @@ namespace Prototype.UI
             stubborness.value = v;
         }
 
+        public void ShowInputButton()
+        {
+            buttonImage.color = Color.white;
+        }
+
+        public void HideInputButton()
+        {
+            buttonImage.color = transparent;
+        }
     }
 
 }

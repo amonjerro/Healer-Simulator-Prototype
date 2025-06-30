@@ -21,6 +21,10 @@ namespace Prototype
         GameObject MemberStatsPrefab;
 
         [SerializeField]
+        [Tooltip("The container for the player's powers")]
+        PowerContainer PowerContainer;
+
+        [SerializeField]
         [Tooltip("The prefabs for the party")]
         GameObject[] Party;
         
@@ -67,10 +71,22 @@ namespace Prototype
         /// <param name="message">The message received</param>
         private void HandleServiceMessage(ServiceMessage message)
         {
-            if (message.Type == ServiceMessageTypes.ActorRegistered)
+            switch (message.Type)
             {
-                CreateStatsUI(message.MessageValue as Character);
+                case ServiceMessageTypes.ActorRegistered:
+                    CreateStatsUI(message.MessageValue as Character);
+                    return;
+                case ServiceMessageTypes.PlayerRegistered:
+                    AssignPowersUI(message.MessageValue as Character);
+                    return;
+                default:
+                    return;
             }
+        }
+
+        private void AssignPowersUI(Character c)
+        {
+            c.SetPowersContainer(PowerContainer);
         }
     }
 }

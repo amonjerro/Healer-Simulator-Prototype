@@ -9,6 +9,10 @@ namespace Prototype
         SkillUse,
         PlayAudio,
 
+        // UI Stuff
+        UITargetRequest,
+        UIAbilityRequest,
+
         // Status Enums
         AbilityAvailabilityChange,
         DamageTaken,

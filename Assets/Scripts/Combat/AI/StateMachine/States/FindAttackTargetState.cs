@@ -17,9 +17,7 @@ namespace Prototype.StateMachine
             // Ready an attack ability
             CharacterEvent<int> characterEvent = new CharacterEvent<int>(CharacterEventTypes.SkillReady, 0);
             controller.PublishMessage(characterEvent);
-            c = null;
-
-            c = controller.FindTarget(false);
+            c = null;   
         }
 
         protected override void OnExit()
@@ -31,6 +29,7 @@ namespace Prototype.StateMachine
 
         protected override void OnUpdate()
         {
+            c = controller.FindTarget(false);
             targetFound.SetValue(c != null);
         }
     }

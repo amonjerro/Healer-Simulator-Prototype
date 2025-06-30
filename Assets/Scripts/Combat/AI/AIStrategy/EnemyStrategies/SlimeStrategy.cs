@@ -67,7 +67,7 @@ namespace Prototype
         public override void HandleDeath()
         {
             AIDirectorService directorService = ServiceLocator.Instance.GetService<AIDirectorService>();
-            directorService.UnregisterActor(ActorAttitude.Hostile, owner.GetCharacter());
+            directorService.UnregisterEnemy(owner.GetCharacter());
             owner.CleanUp();
             
         }

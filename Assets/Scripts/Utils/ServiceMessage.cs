@@ -2,7 +2,8 @@ namespace Prototype
 {
     public enum ServiceMessageTypes
     {
-        ActorRegistered
+        ActorRegistered,
+        PlayerRegistered
     }
 
     public abstract class ServiceMessage

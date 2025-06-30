@@ -19,6 +19,8 @@ namespace Prototype.StateMachine
             CharacterEvent ev = new CharacterEvent<bool>(CharacterEventTypes.SkillUse, false);
             handler.PublishMessage(ev);
 
+            CharacterEvent ev2 = new CharacterEvent<bool>(CharacterEventTypes.UIAbilityRequest, true);
+            handler.PublishUIMessage(ev2);
         }
 
         protected override void OnExit()
@@ -26,6 +28,9 @@ namespace Prototype.StateMachine
             // Stage the power
             CharacterEvent ev = new CharacterEvent<int>(CharacterEventTypes.SkillReady, (int) inputKey);
             handler.PublishMessage(ev);
+
+            CharacterEvent ev2 = new CharacterEvent<bool>(CharacterEventTypes.UITargetRequest, true);
+            handler.PublishUIMessage(ev2);
 
 
             // Flush stuff out

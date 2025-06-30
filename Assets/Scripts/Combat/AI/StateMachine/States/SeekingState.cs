@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 namespace Prototype.StateMachine
@@ -7,7 +7,7 @@ namespace Prototype.StateMachine
     {
 
         Character target;
-        float seekTimer = 2;
+        float seekTimer = 1;
         float elapsed;
         float range = 0.5f;
         EqualsCondition<bool> targetDead;
