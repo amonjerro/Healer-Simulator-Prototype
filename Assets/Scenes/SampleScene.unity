@@ -1345,6 +1345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxX: 6
+  spawner: {fileID: 0}
 --- !u!1 &938316124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1971,7 +1972,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 6365588810885559644, guid: fcea5471d41da9846b8e83254cd138ce, type: 3}
   spawnInterval: 3
-  maxSpawn: 2
+  maxEnemiesToSpawn: 2
+  waveSize: 10
   possibleSpawnPoints:
   - {fileID: 2138289495}
   - {fileID: 540095786}
@@ -2092,7 +2094,7 @@ MonoBehaviour:
   - {fileID: 4209904454774020314, guid: 80b09c2fae5b44646bde0feded95c7c2, type: 3}
   - {fileID: 1112639030845239980, guid: 94d5b0709681db5479b009edd8dfc6b4, type: 3}
   - {fileID: 1112639030845239980, guid: 94d5b0709681db5479b009edd8dfc6b4, type: 3}
-  combatOverText: {fileID: 0}
+  combatOverText: {fileID: 1447080871}
 --- !u!4 &1814986392
 Transform:
   m_ObjectHideFlags: 0
