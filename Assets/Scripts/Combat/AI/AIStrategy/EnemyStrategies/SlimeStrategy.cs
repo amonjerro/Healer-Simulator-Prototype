@@ -14,11 +14,14 @@ namespace Prototype
             FindAttackTargetState targetState = new FindAttackTargetState(machine, controller);
             SeekingState seekingState = new SeekingState(machine, controller);
             AttackingState attackingState = new AttackingState(machine, controller);
+            WanderState wanderingState = new WanderState(machine, controller);
 
             // Transition wiring
+            idleState.transitions[CharacterStates.Wandering].TargetState = wanderingState;
+            wanderingState.transitions[CharacterStates.Idle].TargetState = idleState;
             idleState.transitions[CharacterStates.FindTarget].TargetState = targetState;
             targetState.transitions[CharacterStates.Seeking].TargetState = seekingState;
-            seekingState.transitions[CharacterStates.Seeking].TargetState = seekingState;
+            seekingState.transitions[CharacterStates.FindTarget].TargetState = targetState;
             seekingState.transitions[CharacterStates.Attacking].TargetState= attackingState;
             attackingState.transitions[CharacterStates.Idle].TargetState = idleState;
 

@@ -6,7 +6,7 @@ namespace Prototype.StateMachine
     {
         EqualsCondition<bool> cond;
         public AttackingState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c) {
-
+            stateValue = CharacterStates.Attacking;
             cond = new EqualsCondition<bool>(true);
             Transition<CharacterStates> transition = new Transition<CharacterStates>();
             transition.SetCondition(cond);

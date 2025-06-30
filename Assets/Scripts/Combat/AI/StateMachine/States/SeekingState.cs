@@ -6,12 +6,13 @@ namespace Prototype.StateMachine
     {
 
         Character target;
-        float range = 0.2f;
+        float range = 0.5f;
         EqualsCondition<bool> targetDead;
         LessThanCondition<float> withinRange;
 
         public SeekingState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c)
         {
+            stateValue = CharacterStates.Seeking;
             targetDead = new EqualsCondition<bool>(true);
             withinRange = new LessThanCondition<float>(range);
             Transition<CharacterStates> toFindingTargetTransition = new Transition<CharacterStates>();
@@ -40,13 +41,12 @@ namespace Prototype.StateMachine
         {
             // Update destination if necessary
             float distance = target.transform.position.x - controller.transform.position.x;
-            
             // Move towards destination
             controller.MoveInDirection(Mathf.Sign(distance));
 
             // Check conditions
             targetDead.SetValue(!target.IsAlive());
-            withinRange.SetValue(distance);
+            withinRange.SetValue(Mathf.Abs(distance));
 
         }
     }

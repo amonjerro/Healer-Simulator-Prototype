@@ -134,6 +134,9 @@ namespace Prototype
         /// </summary>
         private void UpdateUI()
         {
+            if (statsUI == null) {
+                return;
+            }
             statsUI.SetHealthValue(data.GetFloatHealth());
             statsUI.SetManaValue(data.GetFloatMana());
             statsUI.SetStubbornessValue(data.GetFloatStubborn());

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1480579710957083049}
   - component: {fileID: 768947379961926426}
   - component: {fileID: 2124047993365058162}
+  - component: {fileID: 9133642287432385791}
   m_Layer: 8
   m_Name: Visualization
   m_TagString: Untagged
@@ -110,6 +111,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9133642287432385791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2470146976654801476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50db75633c4b304f9222f4b0519749c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldMoonwalk: 0
+  startsFlipped: 0
+  floatingText: {fileID: 3352126934072587479, guid: 05d993541436f764ebf4aeb5911a0573, type: 3}
 --- !u!1 &2762090850408475885
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +280,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.4, y: 0.4}
   m_EdgeRadius: 0
 --- !u!50 &2045088405198093590
 Rigidbody2D:

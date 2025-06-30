@@ -7,14 +7,26 @@ namespace Prototype.StateMachine
     {
         float timeToIdle = 2.0f;
         float timer;
-        GreaterThanCondition<float> condition;
+        GreaterThanCondition<float> timeCondition;
+        EqualsCondition<bool> enemiesPresent;
+        EqualsCondition<bool> enemiesNotPresent;
+        AndCondition enemiesAndTime;
+        AndCondition timeNoEnemies;
         public IdleState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c) {
             stateValue = CharacterStates.Idle;
-            condition = new GreaterThanCondition<float>(timeToIdle);
-            Transition<CharacterStates> transition = new Transition<CharacterStates>();
-            transition.SetCondition(condition);
-            transitions.Add(CharacterStates.Wandering, transition);
-            
+            timeCondition = new GreaterThanCondition<float>(timeToIdle);
+            enemiesPresent = new EqualsCondition<bool>(true);
+            enemiesNotPresent = new EqualsCondition<bool>(false);
+            enemiesAndTime = new AndCondition(timeCondition, enemiesPresent);
+            timeNoEnemies = new AndCondition(timeCondition, enemiesNotPresent);
+
+            Transition<CharacterStates> toWandering = new Transition<CharacterStates>();
+            Transition<CharacterStates> toAcquireTarget = new Transition<CharacterStates>();
+            toWandering.SetCondition(timeNoEnemies);
+            toAcquireTarget.SetCondition(enemiesAndTime);
+
+            transitions.Add(CharacterStates.Wandering, toWandering);
+            transitions.Add(CharacterStates.FindTarget, toAcquireTarget);
         }
 
         protected override void OnEnter()
@@ -32,7 +44,15 @@ namespace Prototype.StateMachine
             // Do nothing for a sec
             timer += TimeUtil.GetDelta();
 
-            condition.SetValue(timer);
+            timeCondition.SetValue(timer);
+            bool enemies = AreThereEnemiesPresent();
+            enemiesPresent.SetValue(enemies);
+            enemiesNotPresent.SetValue(enemies);
+        }
+
+        private bool AreThereEnemiesPresent()
+        {
+            return controller.AreEnemiesPresent(false);
         }
     }
 }

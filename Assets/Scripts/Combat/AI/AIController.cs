@@ -98,11 +98,14 @@ namespace Prototype
 
         public Character FindTarget(bool same)
         {
-            if (same)
-            {
-                return strategy.FindNextTarget(CharacterAttitude);
-            }
-            return strategy.FindNextTarget(oppositeMatch[CharacterAttitude]);
+            ActorAttitude searchTerm = same ? CharacterAttitude : oppositeMatch[CharacterAttitude];
+            return strategy.FindNextTarget(searchTerm);
+        }
+
+        public bool AreEnemiesPresent(bool same)
+        {
+            ActorAttitude searchTerm = same ? CharacterAttitude : oppositeMatch[CharacterAttitude];
+            return ServiceLocator.Instance.GetService<AIDirectorService>().GetCharacterRoster(searchTerm).Count > 0;
         }
     }
 }

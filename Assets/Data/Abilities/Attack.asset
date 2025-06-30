@@ -22,9 +22,10 @@ MonoBehaviour:
     abilityName: Attack
     power: 10
     cost: 0
+    audioClip: {fileID: 0}
   statusEffectData: {fileID: 0}
   effectData:
-    healthFactor: 0
-    confidenceFactor: 0
+    healthFactor: -1
+    confidenceFactor: -0.3
     stubbornessFactor: 0
   animationDuration: 0

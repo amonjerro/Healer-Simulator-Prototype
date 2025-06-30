@@ -49,6 +49,8 @@ namespace Prototype
             {
                 case StrategyTypes.TankAlly:
                     return new TankAllyStrategy(c);
+                case StrategyTypes.Enemy:
+                    return new SlimeStrategy(c);
                 default:
                     return new IdleStrategy(c);
             }

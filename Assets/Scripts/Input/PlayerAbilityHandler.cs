@@ -1,5 +1,4 @@
 using Prototype.StateMachine;
-using System.Diagnostics;
 using UnityEngine;
 
 namespace Prototype
