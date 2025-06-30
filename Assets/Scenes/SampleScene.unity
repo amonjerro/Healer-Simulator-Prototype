@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxX: 6
-  spawner: {fileID: 0}
+  spawner: {fileID: 1721999869}
 --- !u!1 &938316124
 GameObject:
   m_ObjectHideFlags: 0

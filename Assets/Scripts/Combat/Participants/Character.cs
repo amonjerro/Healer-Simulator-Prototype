@@ -334,6 +334,12 @@ namespace Prototype
                     abilityAvailability[i] = true;
                 }
             }
+
+            if(powerContainer != null)
+            {
+                powerContainer.SetPowerAvailability(abilityAvailability);
+            }
+
             CharacterEvent<bool[]> ev = new CharacterEvent<bool[]>(CharacterEventTypes.AbilityAvailabilityChange, abilityAvailability);
             eventManager.BroadcastStatusChange(ev);
             

@@ -10,16 +10,35 @@ namespace Prototype.UI
         [SerializeField]
         Image[] buttonImages;
 
+        bool[] powerAvailability;
+        bool bShowing;
+
+        public void SetPowerAvailability(bool[] availability)
+        {
+            powerAvailability = availability;
+            UpdateReveal();
+        }
+
+
         public void HideButtonImages()
         {
+            bShowing = false;
             foreach (Image image in buttonImages) { 
                 image.color = transparent;
             }
         }
 
         public void ShowButtonImages() {
-            foreach (Image image in buttonImages) { 
-                image.color = Color.white;
+            bShowing = true;
+            UpdateReveal();
+        }
+
+        private void UpdateReveal()
+        {
+            for (int i = 0; i < buttonImages.Length; i++) {
+                if (bShowing && powerAvailability[i]) {
+                    buttonImages[i].color = Color.white;
+                }
             }
         }
     }
