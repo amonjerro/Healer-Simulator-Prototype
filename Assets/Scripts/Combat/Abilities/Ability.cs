@@ -181,7 +181,7 @@ namespace Prototype
         // Right now this does nothing except debugging, so might delete later
         protected override void AfterExecute()
         {
-            UnityEngine.Debug.Log("Ability Executed");
+            //UnityEngine.Debug.Log("Ability Executed");
         }
     }
 
