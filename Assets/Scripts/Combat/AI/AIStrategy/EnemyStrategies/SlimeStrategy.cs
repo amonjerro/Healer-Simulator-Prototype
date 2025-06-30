@@ -1,14 +1,17 @@
 using Prototype.StateMachine;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Prototype
 {
     public class SlimeStrategy : AbsAIStrategy
     {
+        public SlimeStrategy(AIController c) : base(c) { }
         public override StateMachine<CharacterStates> SetupAIStateMachine(StateMachine<CharacterStates> machine, AIController controller)
         {
             // State instantiation
             IdleState idleState = new IdleState(machine, controller);
-            FindTargetState targetState = new FindTargetState(machine, controller);
+            FindAttackTargetState targetState = new FindAttackTargetState(machine, controller);
             SeekingState seekingState = new SeekingState(machine, controller);
             AttackingState attackingState = new AttackingState(machine, controller);
 
@@ -21,6 +24,31 @@ namespace Prototype
 
             machine.SetStartingState(idleState);
             return machine;
+        }
+
+        
+        public override Character FindNextTarget(ActorAttitude toGet)
+        {
+            AIDirectorService service = ServiceLocator.Instance.GetService<AIDirectorService>();
+            List<Character> candidates = service.GetCharacterRoster(toGet);
+
+            if (candidates.Count == 0) { return null; }
+
+            float minDistance = 999;
+            float dist;
+            Character candidate = null;
+
+            foreach(Character c in candidates)
+            {
+                dist = Mathf.Abs(c.transform.position.x - owner.transform.position.x);
+                if (dist < minDistance)
+                {
+                    minDistance = dist;
+                    candidate = c;
+                }
+            }
+
+            return candidate;
         }
     }
 }

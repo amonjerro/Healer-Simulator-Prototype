@@ -1,5 +1,6 @@
 using UnityEngine;
 using Prototype.StateMachine;
+using System.Collections.Generic;
 
 namespace Prototype
 {
@@ -24,6 +25,7 @@ namespace Prototype
         StrategyTypes aiStrategy;
 
         StateMachine<CharacterStates> stateMachine;
+        Dictionary<ActorAttitude, ActorAttitude> oppositeMatch;
         CharacterEventManager eventManager;
         AIDirectorService directorRef;
         AbsAIStrategy strategy;
@@ -36,7 +38,8 @@ namespace Prototype
             directorRef = ServiceLocator.Instance.GetService<AIDirectorService>();
             directorRef.RegisterActor(CharacterAttitude, character);
             stateMachine = new StateMachine<CharacterStates>();
-            strategy = AIStrategyFactory.MakeStrategy(aiStrategy);
+            strategy = AIStrategyFactory.MakeStrategy(aiStrategy, this);
+            oppositeMatch = new Dictionary<ActorAttitude, ActorAttitude>() { { ActorAttitude.Friendly, ActorAttitude.Hostile }, { ActorAttitude.Hostile, ActorAttitude.Friendly } };
             SetupStateMachine();
         }
 
@@ -91,6 +94,15 @@ namespace Prototype
         public Character GetTarget()
         {
             return targetRef;
+        }
+
+        public Character FindTarget(bool same)
+        {
+            if (same)
+            {
+                return strategy.FindNextTarget(CharacterAttitude);
+            }
+            return strategy.FindNextTarget(oppositeMatch[CharacterAttitude]);
         }
     }
 }

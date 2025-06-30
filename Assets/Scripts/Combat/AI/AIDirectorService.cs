@@ -95,5 +95,20 @@ namespace Prototype
         {
             return hostileAIs[index];
         }
+
+        /// <summary>
+        /// Gets the active character roster for either side
+        /// </summary>
+        /// <param name="actorAttitude">The attitude of the characters to get</param>
+        /// <returns>A roster of characters</returns>
+        public List<Character> GetCharacterRoster(ActorAttitude actorAttitude)
+        {
+            if (actorAttitude == ActorAttitude.Friendly) {
+                return FriendlyCharacters;
+            } else
+            {
+                return hostileAIs;
+            }
+        }
     }
 }

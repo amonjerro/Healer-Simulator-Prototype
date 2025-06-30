@@ -1,12 +1,15 @@
 namespace Prototype.StateMachine
 {
-    public class FindTargetState : AICharacterState
+    public class FindAttackTargetState : AICharacterState
     {
         EqualsCondition<bool> targetFound;
         Character c;
 
-        public FindTargetState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c) { 
-           
+        public FindAttackTargetState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c) {
+            targetFound = new EqualsCondition<bool>(true);
+            Transition<CharacterStates> transition = new Transition<CharacterStates>();
+            transition.SetCondition(targetFound);
+            transitions.Add(CharacterStates.Seeking, transition);
         }
         protected override void OnEnter()
         {
@@ -14,6 +17,8 @@ namespace Prototype.StateMachine
             CharacterEvent<int> characterEvent = new CharacterEvent<int>(CharacterEventTypes.SkillReady, 0);
             controller.PublishMessage(characterEvent);
             c = null;
+
+            c = controller.FindTarget(false);
         }
 
         protected override void OnExit()
