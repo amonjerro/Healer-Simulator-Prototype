@@ -180,8 +180,6 @@ MonoBehaviour:
   _characterDataAsset: {fileID: 11400000, guid: d95362ef4d0748b4b93754ddc5fc5a04, type: 2}
   abilities:
   - {fileID: 11400000, guid: a6d7bdf503a894847b0248350766ba01, type: 2}
-  - {fileID: 11400000, guid: 402832c02fcde6345bf2bf50c1f7e32f, type: 2}
-  - {fileID: 11400000, guid: 66ded6a521777f24bb1321c994ccd34a, type: 2}
 --- !u!61 &2953385241201850547
 BoxCollider2D:
   m_ObjectHideFlags: 0
