@@ -7,14 +7,14 @@ namespace Prototype
     /// <summary>
     /// Class that receives all player input and distributes it logically through the rest of the Character architecture
     /// </summary>
-    public class PlayerController : MonoBehaviour
+    public class PlayerInputHandler : MonoBehaviour
     {
         CharacterEventManager eventManager;
-        PlayerAbilityHandler abilityHandler;
+        PlayerCharacterController abilityHandler;
 
         private void Start()
         {
-            abilityHandler = GetComponent<PlayerAbilityHandler>();
+            abilityHandler = GetComponent<PlayerCharacterController>();
             Character character = GetComponentInParent<Character>();
             eventManager = character.GetComponentInParent<CharacterEventManager>();
             ServiceLocator.Instance.GetService<AIDirectorService>().RegisterActor(ActorAttitude.Player, character);

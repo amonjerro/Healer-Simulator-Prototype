@@ -10,7 +10,7 @@ namespace Prototype
     /// This class acts as a counterpart to the player controller and sends the same signals
     /// to the character class via events
     /// </summary>
-    public class AIController : MonoBehaviour
+    public class AIController : AbsCharacterController
     {
 
         [SerializeField]
@@ -27,7 +27,6 @@ namespace Prototype
 
         StateMachine<CharacterStates> stateMachine;
         Dictionary<ActorAttitude, ActorAttitude> oppositeMatch;
-        CharacterEventManager eventManager;
         AIDirectorService directorRef;
         AbsAIStrategy strategy;
         Character targetRef;
@@ -54,7 +53,7 @@ namespace Prototype
         /// Sets up the state machine for an AI controller. Part of initialization.
         /// Internals delegated to AI strategy
         /// </summary>
-        protected void SetupStateMachine()
+        protected override void SetupStateMachine()
         {
             strategy.SetupAIStateMachine(stateMachine, this);
         }
@@ -81,11 +80,6 @@ namespace Prototype
         public void MoveInDirection(float direction) {
             CharacterEvent ce = new CharacterEvent<float>(CharacterEventTypes.Movement, direction);
             eventManager.BroadcastCharacterEvent(ce);
-        }
-
-        public void PublishMessage(CharacterEvent ev)
-        {
-            eventManager.BroadcastCharacterEvent(ev);
         }
 
         public ActorAttitude GetAttitude()
@@ -120,7 +114,7 @@ namespace Prototype
             strategy.HandleDeath();
         }
 
-        private void ProcessEvents(CharacterEvent ev)
+        protected override void ProcessEvents(CharacterEvent ev)
         {
             switch (ev.eventType)
             {

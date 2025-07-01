@@ -3,7 +3,7 @@ namespace Prototype.StateMachine
     public abstract class AbsPlayerAbilityState : AbsState<AbilityStates>
     {
         protected InputKeys inputKey;
-        protected PlayerAbilityHandler handler;
+        protected PlayerCharacterController handler;
 
         protected AbsPlayerAbilityState()
         {
@@ -15,7 +15,7 @@ namespace Prototype.StateMachine
             inputKey = k;
         }
 
-        public void SetAbilityHandler(PlayerAbilityHandler handler)
+        public void SetAbilityHandler(PlayerCharacterController handler)
         {
             this.handler = handler;
         }

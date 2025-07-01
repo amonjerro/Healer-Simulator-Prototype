@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 2071095153613107829}
   - component: {fileID: 2598291631205361750}
   - component: {fileID: 585345175692569850}
-  - component: {fileID: 8038711634977885166}
+  - component: {fileID: 3570685435522447219}
   m_Layer: 6
   m_Name: MovementController
   m_TagString: Untagged
@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdfc50681a7271428a4df6e7ec2258f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8038711634977885166
+--- !u!114 &3570685435522447219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6475202539032150585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df4f8bdf0558f5a4aad68c2811fab271, type: 3}
+  m_Script: {fileID: 11500000, guid: 0203afff4a99a0f43a96ac866d7ed779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0

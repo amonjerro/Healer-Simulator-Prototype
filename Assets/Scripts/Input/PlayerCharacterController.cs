@@ -13,7 +13,7 @@ namespace Prototype
         None
     }
 
-    public class PlayerAbilityHandler : MonoBehaviour
+    public class PlayerCharacterController : MonoBehaviour
     {
 
         CharacterEventManager eventManager;
