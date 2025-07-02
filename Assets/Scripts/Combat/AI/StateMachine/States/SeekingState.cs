@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Prototype.StateMachine
 {
+    /// <summary>
+    /// The seeking state, where the AI seeks and moves towards its target
+    /// </summary>
     public class SeekingState : AICharacterState
     {
 

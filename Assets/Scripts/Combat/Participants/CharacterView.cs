@@ -18,6 +18,7 @@ namespace Prototype
         bool startsFlipped;
 
         [SerializeField]
+        [Tooltip("A floating text prefab object")]
         GameObject floatingText;
 
         // Component references

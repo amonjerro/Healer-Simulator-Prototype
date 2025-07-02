@@ -2,10 +2,14 @@ using Prototype;
 
 namespace Prototype.StateMachine
 {
+    /// <summary>
+    /// Class that determines what to do when a character is attacking.
+    /// </summary>
     public class AttackingState : AICharacterState
     {
         EqualsCondition<bool> cond;
-        public AttackingState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c) {
+        public AttackingState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c)
+        {
             stateValue = CharacterStates.Attacking;
             cond = new EqualsCondition<bool>(true);
             Transition<CharacterStates> transition = new Transition<CharacterStates>();

@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Prototype.StateMachine
 {
+    /// <summary>
+    /// The base idle state. The character will wait for a bit then test to see if it can transition to other states
+    /// </summary>
     public class IdleState : AICharacterState
     {
         float timeToIdle = 2.0f;
@@ -12,7 +15,8 @@ namespace Prototype.StateMachine
         EqualsCondition<bool> enemiesNotPresent;
         AndCondition enemiesAndTime;
         AndCondition timeNoEnemies;
-        public IdleState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c) {
+        public IdleState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c)
+        {
             stateValue = CharacterStates.Idle;
             timeCondition = new GreaterThanCondition<float>(timeToIdle);
             enemiesPresent = new EqualsCondition<bool>(true);

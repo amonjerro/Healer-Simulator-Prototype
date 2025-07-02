@@ -1,5 +1,9 @@
 namespace Prototype.StateMachine
 {
+    
+    /// <summary>
+    /// State that awaits for input from the player
+    /// </summary>
     public class AwaitingState : AbsPlayerAbilityState
     {
         EqualsCondition<bool> targetingInputCondition;
@@ -11,7 +15,7 @@ namespace Prototype.StateMachine
             Transition<AbilityStates> toTargeting = new Transition<AbilityStates>();
             toTargeting.SetCondition(targetingInputCondition);
             transitions.Add(AbilityStates.ChooseTarget, toTargeting);
-        } 
+        }
 
         protected override void OnEnter()
         {
@@ -26,7 +30,7 @@ namespace Prototype.StateMachine
         protected override void OnExit()
         {
             // Stage the power
-            CharacterEvent ev = new CharacterEvent<int>(CharacterEventTypes.SkillReady, (int) inputKey);
+            CharacterEvent ev = new CharacterEvent<int>(CharacterEventTypes.SkillReady, (int)inputKey);
             handler.PublishMessage(ev);
 
             CharacterEvent ev2 = new CharacterEvent<bool>(CharacterEventTypes.UITargetRequest, true);
@@ -43,9 +47,16 @@ namespace Prototype.StateMachine
             targetingInputCondition.SetValue(IsAbilityInput(inputKey) && IsInputAvailable(inputKey));
         }
 
+        /// <summary>
+        /// Tests whether the input given corresponds to a given ability. 
+        /// This is pretty hardcoded and should be informed by the player's loadout
+        /// </summary>
+        /// <param name="k">The input passed</param>
+        /// <returns>True if it is an ability input</returns>
         private bool IsAbilityInput(InputKeys k)
         {
-            switch (k) {
+            switch (k)
+            {
                 case InputKeys.One:
                 case InputKeys.Two:
                 case InputKeys.Three:

@@ -1,5 +1,8 @@
 namespace Prototype.StateMachine
 {
+    /// <summary>
+    /// The abstract class that governs the states that make up the player's ability targeting pipeline
+    /// </summary>
     public abstract class AbsPlayerAbilityState : AbsState<AbilityStates>
     {
         protected InputKeys inputKey;
@@ -9,7 +12,7 @@ namespace Prototype.StateMachine
         {
             transitions = new System.Collections.Generic.Dictionary<AbilityStates, Transition<AbilityStates>>();
         }
-        
+
         public void SetKey(InputKeys k)
         {
             inputKey = k;

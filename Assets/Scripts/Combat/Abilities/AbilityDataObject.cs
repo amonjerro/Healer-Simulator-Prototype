@@ -2,6 +2,9 @@
 
 namespace Prototype
 {
+    /// <summary>
+    /// Scriptable object that encapsulates all ability information
+    /// </summary>
     [CreateAssetMenu(menuName = "Abilities/AbilityData")]
     class AbilityDataObject : ScriptableObject
     {

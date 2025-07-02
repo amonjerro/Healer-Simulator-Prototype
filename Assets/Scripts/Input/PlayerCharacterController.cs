@@ -1,4 +1,3 @@
-using NUnit.Framework.Internal.Builders;
 using Prototype.StateMachine;
 using UnityEngine;
 
@@ -23,6 +22,7 @@ namespace Prototype
         bool[] abilityAvailability;
 
         [SerializeField]
+        [Tooltip("Read-only. For debugging purposes.")]
         AbilityStates currentState;
 
         private void Awake()

@@ -82,38 +82,67 @@ namespace Prototype
             eventManager.BroadcastCharacterEvent(ce);
         }
 
+        /// <summary>
+        /// Get this actor's attitude
+        /// </summary>
+        /// <returns></returns>
         public ActorAttitude GetAttitude()
         {
             return CharacterAttitude;
         }
 
+        /// <summary>
+        /// Stage a target reference which states can refer to
+        /// </summary>
+        /// <param name="c">A character to target with an ability</param>
         public void SetTarget(Character c)
         {
             targetRef = c;
         }
-        
+
+        /// <summary>
+        /// Get the target reference
+        /// </summary>
+        /// <returns>The set target</returns>
         public Character GetTarget()
         {
             return targetRef;
         }
 
+        /// <summary>
+        /// Finds a target according to this controller's strategy
+        /// </summary>
+        /// <param name="same">Whether to search for other characters who share this character's attitude</param>
+        /// <returns>A found target. Can return null.</returns>
         public Character FindTarget(bool same)
         {
             ActorAttitude searchTerm = same ? CharacterAttitude : oppositeMatch[CharacterAttitude];
             return strategy.FindNextTarget(searchTerm);
         }
 
+        /// <summary>
+        /// Asks the AI director to check if the roster of characters for the given attitude has elements in it
+        /// </summary>
+        /// <param name="same">Should the check be for characters who share this character's attitude</param>
+        /// <returns>Whether opponents are present</returns>
         public bool AreEnemiesPresent(bool same)
         {
             ActorAttitude searchTerm = same ? CharacterAttitude : oppositeMatch[CharacterAttitude];
             return ServiceLocator.Instance.GetService<AIDirectorService>().GetCharacterRoster(searchTerm).Count > 0;
         }
 
+        /// <summary>
+        /// Delegates all handling of death to the strategy pattern
+        /// </summary>
         public void HandleDeath()
         {
             strategy.HandleDeath();
         }
 
+        /// <summary>
+        /// Process any relevant character events
+        /// </summary>
+        /// <param name="ev">The character event to process</param>
         protected override void ProcessEvents(CharacterEvent ev)
         {
             switch (ev.eventType)
@@ -126,11 +155,19 @@ namespace Prototype
             }
         }
 
+        /// <summary>
+        /// Get a reference to this controller's character.
+        /// I really hate having to create dependencies like this and am thinking of ways of removing this function
+        /// </summary>
+        /// <returns>This controller's character</returns>
         public Character GetCharacter()
         {
             return GetComponentInParent<Character>();
         }
 
+        /// <summary>
+        /// Do cleanup of this object
+        /// </summary>
         public void CleanUp()
         {
             Destroy(gameObject.transform.parent.gameObject, 2.0f);

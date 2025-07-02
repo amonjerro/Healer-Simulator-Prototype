@@ -1,11 +1,16 @@
 namespace Prototype.StateMachine
 {
+    /// <summary>
+    /// State the player is in while casting
+    /// For the most part it's just a pause state
+    /// </summary>
     public class CastingState : AbsPlayerAbilityState
     {
         float timer;
         GreaterThanCondition<float> timerCondition;
-        
-        public CastingState() : base() {
+
+        public CastingState() : base()
+        {
             stateValue = AbilityStates.UsingAbility;
             timerCondition = new GreaterThanCondition<float>(0);
             Transition<AbilityStates> transition = new Transition<AbilityStates>();
@@ -23,7 +28,7 @@ namespace Prototype.StateMachine
 
         protected override void OnExit()
         {
-            
+
         }
 
         protected override void OnUpdate()

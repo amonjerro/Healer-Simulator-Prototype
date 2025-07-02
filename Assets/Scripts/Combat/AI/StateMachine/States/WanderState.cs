@@ -2,13 +2,17 @@ using UnityEngine;
 
 namespace Prototype.StateMachine
 {
+    /// <summary>
+    /// A wander state to have an AI character move about between Idle cycles
+    /// Makes characters feel a little more alive
+    /// </summary>
     public class WanderState : AICharacterState
     {
         float wanderTarget;
         float tolerance = 0.3f;
         LessThanCondition<float> withinToleranceCondition;
 
-        public WanderState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c) 
+        public WanderState(StateMachine<CharacterStates> sm, AIController c) : base(sm, c)
         {
 
             stateValue = CharacterStates.Wandering;

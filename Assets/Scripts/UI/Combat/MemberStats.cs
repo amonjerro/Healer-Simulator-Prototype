@@ -23,9 +23,11 @@ namespace Prototype.UI
         Image portrait;
 
         [SerializeField]
+        [Tooltip("Reference to the button image that will instruct which buttons to press")]
         Image buttonImage;
 
         [SerializeField]
+        [Tooltip("A list of possible button sprites that can act as the content for the buttonImage")]
         List<Sprite> buttonImages;
 
         int _buttonIndex;
@@ -57,11 +59,19 @@ namespace Prototype.UI
             stubborness.value = v;
         }
 
+
+        /// <summary>
+        /// Shows the input button by setting the image color to non-translucent white
+        /// </summary>
         public void ShowInputButton()
         {
             buttonImage.color = Color.white;
         }
 
+
+        /// <summary>
+        /// Hide this image by turning the color transparent.
+        /// </summary>
         public void HideInputButton()
         {
             buttonImage.color = transparent;

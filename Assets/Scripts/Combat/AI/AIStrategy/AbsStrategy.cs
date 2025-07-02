@@ -66,7 +66,7 @@ namespace Prototype
     }
 
     /// <summary>
-    /// Static strategy constructor, handles the creation of specific strategies
+    /// Static strategy constructor, handles the creation of strategy objects
     /// </summary>
     public static class AIStrategyFactory
     {

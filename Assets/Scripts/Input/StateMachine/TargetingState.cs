@@ -1,8 +1,8 @@
-using static UnityEngine.GraphicsBuffer;
-using static UnityEngine.Rendering.DebugUI;
-
 namespace Prototype.StateMachine
 {
+    /// <summary>
+    /// Turns input into target setting logic.
+    /// </summary>
     public class TargetingState : AbsPlayerAbilityState
     {
         EqualsCondition<bool> cancelCondition;
@@ -51,7 +51,8 @@ namespace Prototype.StateMachine
             return k == InputKeys.Cancel;
         }
 
-        private bool IsTargetingInput(InputKeys k) {
+        private bool IsTargetingInput(InputKeys k)
+        {
             switch (k)
             {
                 case InputKeys.One:

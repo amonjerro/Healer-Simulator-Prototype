@@ -93,12 +93,20 @@ namespace Prototype
                     return;
             }
         }
-
-        private void AssignPowersUI(Character c)
+        
+        /// <summary>
+        /// Assigns the PowersUI to the player character
+        /// </summary>
+        /// <param name="c">A reference to the player character</param>
+        private void AssignPowersUI(Character player)
         {
-            c.SetPowersContainer(PowerContainer);
+            player.SetPowersContainer(PowerContainer);
         }
 
+        /// <summary>
+        /// Show the game over text
+        /// </summary>
+        /// <param name="text">The message to show</param>
         public void UpdateCombatOverText(string text)
         {
             combatOverText.text = text;

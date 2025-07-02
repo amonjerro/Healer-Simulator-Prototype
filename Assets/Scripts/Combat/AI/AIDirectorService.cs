@@ -21,6 +21,7 @@ namespace Prototype
         float maxX;
 
         [SerializeField]
+        [Tooltip("Reference to an enemy spawner")]
         Spawner spawner;
 
         private void Awake()
@@ -75,12 +76,20 @@ namespace Prototype
             ServiceLocator.serviceAction?.Invoke(serviceMessage);
         }
 
-        private void EmitPlayerRegistered(Character c)
+
+        /// <summary>
+        /// Emit a message to let other services know the player has been registered and send that reference over
+        /// </summary>
+        /// <param name="c"></param>
+        private void EmitPlayerRegistered(Character player)
         {
-            ServiceMessage<Character> serviceMessage = new ServiceMessage<Character>(c, ServiceMessageTypes.PlayerRegistered);
+            ServiceMessage<Character> serviceMessage = new ServiceMessage<Character>(player, ServiceMessageTypes.PlayerRegistered);
             ServiceLocator.serviceAction?.Invoke(serviceMessage);
         }
 
+        /// <summary>
+        /// Emits a signal to let other services the game is over and it has ended in victory
+        /// </summary>
         private void EmitGameWinEvent()
         {
             ServiceMessage<bool> serviceMessage = new ServiceMessage<bool>(true, ServiceMessageTypes.GameWin);
