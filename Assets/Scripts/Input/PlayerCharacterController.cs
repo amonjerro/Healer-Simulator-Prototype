@@ -12,7 +12,7 @@ namespace Prototype
         None
     }
 
-    public class PlayerCharacterController : MonoBehaviour
+    public class PlayerCharacterController : AbsCharacterController
     {
 
         CharacterEventManager eventManager;
@@ -46,7 +46,7 @@ namespace Prototype
             lastKeyPressed = InputKeys.None;
         }
 
-        protected void SetupStateMachine()
+        protected override void SetupStateMachine()
         {
             // Create the states
             CastingState castingState = new CastingState();
@@ -76,11 +76,6 @@ namespace Prototype
             lastKeyPressed = InputKeys.Cancel;
         }
 
-        public void PublishMessage(CharacterEvent ev)
-        {
-            eventManager.BroadcastCharacterEvent(ev);
-        }
-
         public void PublishUIMessage(CharacterEvent ev)
         {
             eventManager.BroadcastUIEvent(ev);
@@ -91,7 +86,7 @@ namespace Prototype
             return index >= abilityAvailability.Length ? false : abilityAvailability[index];
         }
 
-        private void ProcessEvents(CharacterEvent ev)
+        protected override void ProcessEvents(CharacterEvent ev)
         {
             switch (ev.eventType)
             {
