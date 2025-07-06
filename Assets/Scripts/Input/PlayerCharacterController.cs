@@ -15,7 +15,6 @@ namespace Prototype
     public class PlayerCharacterController : AbsCharacterController
     {
 
-        CharacterEventManager eventManager;
         StateMachine<AbilityStates> stateMachine;
         InputKeys lastKeyPressed;
 

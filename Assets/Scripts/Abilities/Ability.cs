@@ -147,6 +147,7 @@ namespace Prototype
         {
             character.AddStatusEffect(statusEffect);
         }
+
     }
 
     public class SingleTargetAbility : Ability
